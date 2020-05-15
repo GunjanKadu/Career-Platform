@@ -16,13 +16,6 @@ public class UserRest {
 
 	public ArrayList<User> users = new ArrayList<User>();
 
-	@PostConstruct
-	public void fillUsers() {
-		users.add(new User(1, "Gunjan", "Kadu", "agunjan.kadu@gmail.com"));
-		users.add(new User(2, "Arun", "Kadu", "arun.kadu@gmail.com"));
-		users.add(new User(3, "Harshana", "Kadu", "harshana.kadu@gmail.com"));
-	}
-
 
 	@GetMapping("/users")
 	public ArrayList<User> getUsers() {
