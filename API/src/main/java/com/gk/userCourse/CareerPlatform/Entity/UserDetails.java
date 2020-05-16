@@ -8,12 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "User_Details")
+@Table(name = "user_detail")
 public class UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idUser_Details")
+	@Column(name = "id")
 	private int id;
 
 	@Column(name = "user_desc")
@@ -26,7 +26,7 @@ public class UserDetails {
 
 	}
 
-	public UserDetails(int id, String description, String socialMedia) {
+	public UserDetails( String description, String socialMedia) {
 		this.description = description;
 		this.socialMedia = socialMedia;
 	}

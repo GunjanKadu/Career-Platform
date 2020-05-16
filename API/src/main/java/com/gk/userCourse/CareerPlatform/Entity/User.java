@@ -11,12 +11,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idUser")
+	@Column(name = "id")
 	private int id;
 
 	@Column(name = "first_name")
@@ -28,11 +28,19 @@ public class User {
 	@Column(name = "email")
 	private String email;
 
-	@JoinColumn(name = "user_details")
+	
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_detail_id")
 	private UserDetails userDetails;
 	
-	
+	public UserDetails getUserDetails() {
+		return userDetails;
+	}
+
+	public void setUserDetails(UserDetails userDetails) {
+		this.userDetails = userDetails;
+	}
+
 	public User() {
 
 	}
