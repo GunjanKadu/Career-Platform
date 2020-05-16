@@ -24,7 +24,6 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 
-	@Transactional
 	@Override
 	public List<User> findAll() {
 		Session currentSession = entityManager.unwrap(Session.class);
@@ -38,7 +37,6 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	@Transactional
 	public User findById(int theId) {
 		Session currentSession = entityManager.unwrap(Session.class);
 		User theUser = currentSession.get(User.class, theId);
@@ -46,7 +44,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	
-	@Transactional
+	
 	@Override
 	public void save(User theUser) {
 		Session currentSession = entityManager.unwrap(Session.class);
@@ -55,7 +53,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	@Transactional
+	
 	public void deleteById(int theId) {
 		// TODO Auto-generated method stub
 
