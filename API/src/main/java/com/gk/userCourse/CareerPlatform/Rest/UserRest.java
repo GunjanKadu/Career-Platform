@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gk.userCourse.CareerPlatform.Dao.UserDao;
 import com.gk.userCourse.CareerPlatform.Entity.User;
+import com.gk.userCourse.CareerPlatform.Entity.UserDetails;
 
 @RestController
 @RequestMapping("/api")
@@ -30,15 +31,25 @@ public class UserRest {
 	public List<User> getUsers() {
 		return userDao.findAll();
 	}
+
 	@GetMapping("/users/{userId}")
 	public User getSingleUser(@PathVariable int userId) {
 		return userDao.findById(userId);
 	}
+
 	@PostMapping("/users")
 	public User saveUsers(@RequestBody User theUser) {
 		theUser.setId(0);
 		userDao.save(theUser);
 		return theUser;
+	}
+
+	@PostMapping("/usersDetails/{userId}")
+	public User saveUsers(@PathVariable int userId, @RequestBody UserDetails theUserDetails) {
+		User tempUser = userDao.findById(userId);
+		tempUser.setUserDetails(theUserDetails);
+		userDao.save(tempUser);
+		return tempUser;
 	}
 
 }
