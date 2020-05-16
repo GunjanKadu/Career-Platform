@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gk.userCourse.CareerPlatform.Dao.UserDao;
 import com.gk.userCourse.CareerPlatform.Entity.User;
 import com.gk.userCourse.CareerPlatform.Entity.UserDetails;
+import com.gk.userCourse.CareerPlatform.ErrorHandling.UserNotFoundExecption;
 
 @RestController
 @RequestMapping("/api")
@@ -34,6 +35,10 @@ public class UserRest {
 
 	@GetMapping("/users/{userId}")
 	public User getSingleUser(@PathVariable int userId) {
+		if (userId < 0 || userId > userDao.findAll().size()) {
+			throw new UserNotFoundExecption("User Id Not Found - " + userId);
+		}
+
 		return userDao.findById(userId);
 	}
 
