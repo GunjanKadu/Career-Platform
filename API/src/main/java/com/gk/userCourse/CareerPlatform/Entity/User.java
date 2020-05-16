@@ -28,11 +28,13 @@ public class User {
 	@Column(name = "email")
 	private String email;
 
-	
+	@Column(name = "password")
+	private String password;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_detail_id")
 	private UserDetails userDetails;
-	
+
 	public UserDetails getUserDetails() {
 		return userDetails;
 	}
@@ -45,10 +47,19 @@ public class User {
 
 	}
 
-	public User(String firstName, String lastName, String email) {
+	public User(String firstName, String lastName, String email,String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.password = password;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public int getId() {
