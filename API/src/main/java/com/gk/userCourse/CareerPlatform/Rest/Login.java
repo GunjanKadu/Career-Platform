@@ -22,9 +22,8 @@ public class Login {
 	private AuthenticationManager authenticationManager;
 
 	@PostMapping("/login")
-	public String generateToken(@RequestBody AuthRequest authRequest) throws Exception {
+	public String login(@RequestBody AuthRequest authRequest) throws Exception {
 		try {
-
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUserName(),
 					authRequest.getPasswordString()));
 		} catch (Exception e) {
