@@ -1,18 +1,18 @@
 package com.gk.userCourse.CareerPlatform.Service;
 
-import java.util.List;
-
 import com.gk.userCourse.CareerPlatform.Entity.User;
+
+import java.util.List;
 
 public interface UserService {
 
-	public List<User> findAll();
+	 List<User> findAll();
 	
-	public User findbyId(int theId);
+	 User findbyId(int theId);
 	
-	public void delete(int theId);
+	 void delete(int theId);
 	
-	public void save(User theUser);
+	 void save(User theUser);
 	
 	
 }
