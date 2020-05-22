@@ -1,0 +1,20 @@
+#navbar{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.2rem;
+    padding: 0.75rem;
+}
+
+#navbar img{
+height: 3.5rem;
+width: 3.5rem;
+}
+
+#navbar .search-bar-icon{
+    height: 1.5rem;
+width: 1.5rem;
+}
+
+#navbar .search{
+    display: flex;
+}
