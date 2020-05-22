@@ -1,20 +1,15 @@
-#navbar{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1.2rem;
-    padding: 0.75rem;
+.logo{
+    height: 6rem;
+    width: 12rem;
+    margin-top: -0.9rem;
 }
-
-#navbar img{
-height: 3.5rem;
-width: 3.5rem;
+.btn{
+    height: 3.5rem;
+    width: 9.5rem;
+    margin: 0.5rem;
 }
-
-#navbar .search-bar-icon{
-    height: 1.5rem;
-width: 1.5rem;
-}
-
-#navbar .search{
-    display: flex;
+.navbar{
+    height: 0rem;;
+    background-color: rgba(244, 244, 244, 1) !important;
+    box-shadow:  0 3px 10px 1px grey;
 }
