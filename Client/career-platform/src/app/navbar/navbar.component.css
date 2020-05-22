@@ -26,6 +26,8 @@
 }
 .card {
   transition: all 2s ease-in;
+  box-shadow: 0 3px 10px 1px grey;
+
   height: 5.5rem;
   width: 100%;
   margin: 1.5rem auto;
@@ -33,13 +35,14 @@
 .card {
   transition: all 0.5s ease-in-out;
   height: 5.5rem;
-  width: 100%;
+  width: 94%;
   margin: 1.5rem auto;
 }
 .modal-body .btn-danger {
   margin: 0;
+  margin-left: 1rem;
   font-size: 1.4rem;
-  width: 100%;
+  width: 94%;
   height: 4.5rem;
 }
 .card h4 {
@@ -66,9 +69,10 @@
 /* Login Form */
 .login-form input {
   height: 3.5rem;
-  width: 100%;
+  width: 94%;
   margin: 1.5rem auto;
 }
+
 /* Login Form */
 
 /* Login Modal */
