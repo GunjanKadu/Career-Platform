@@ -1,23 +1,115 @@
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand " href="#"><img class="logo" src="https://aboutsaharsh.firebaseapp.com/img/udemy.png" alt="Brand"></a>
-  
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <form class="form-inline my-2  my-lg-0" style="margin-left: 3vw;">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search for anything" aria-label="Search" style="width: 20vw; height: 3.5rem;">
-            <button class="btn btn-outline-danger my-2 mx-2 my-sm-0" type="submit">Search</button>
-          </form>
-      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-            <button class="btn btn-dark">Log In</button>
-        </li>
-        <li class="nav-item">
-          <button class="btn btn-danger">Sign Up</button>
-        </li>
-        
-      </ul>
-     
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarTogglerDemo03"
+    aria-controls="navbarTogglerDemo03"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">
+    <img class="logo" src="../../assets/img/navLogo.png" alt="Brand" />
+  </a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <form class="form-inline my-2 my-lg-0" style="margin-left: 3vw;">
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Search for anything"
+        aria-label="Search"
+        style="width: 20vw; height: 3.5rem;"
+      />
+      <button class="btn btn-outline-danger my-2 mx-2 my-sm-0" type="submit">
+        Search
+      </button>
+    </form>
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <button
+          class="btn btn-dark"
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+        >
+          Log In
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-danger">Sign Up</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- Navbar -->
+
+<!-- Login -->
+<div
+  class="modal fade"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLongTitle">
+          Log In to Your Account
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <button class="card">
+          <div class="card-body">
+            <img src="../../assets/img/google.png" alt="google" />
+            <h4><strong>Continue with Google</strong></h4>
+          </div>
+        </button>
+        <button class="card">
+          <div class="card-body">
+            <img src="../../assets/img/facebook.png" alt="google" />
+            <h4><strong>Continue with Facebook</strong></h4>
+          </div>
+        </button>
+        <hr />
+        <form class="login-form">
+          <div class="form-group">
+            <input
+              type="text"
+              placeholder="Email"
+              class="form-control"
+              id="recipient-name"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              placeholder="Password"
+              class="form-control"
+              id="recipient-password"
+            />
+          </div>
+        </form>
+
+        <button type="button" class="btn btn-danger">Log In</button>
+        <p style="margin-top: 0.5rem; text-align: center;">
+          Dont have an account?
+          <span style="color: #395999;"><strong>Sign Up</strong></span>
+        </p>
+      </div>
     </div>
-  </nav>
+  </div>
+</div>
+<!-- Login -->

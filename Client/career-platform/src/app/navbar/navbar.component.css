@@ -1,15 +1,74 @@
-.logo{
-    height: 6rem;
-    width: 12rem;
-    margin-top: -0.9rem;
+/* Navbar */
+.logo {
+  height: 6rem;
+  width: 12rem;
+  margin-top: -0.9rem;
 }
-.btn{
-    height: 3.5rem;
-    width: 9.5rem;
-    margin: 0.5rem;
+.btn {
+  height: 3.5rem;
+  width: 9.5rem;
+  margin: 0.5rem;
 }
-.navbar{
-    height: 0rem;;
-    background-color: rgba(244, 244, 244, 1) !important;
-    box-shadow:  0 3px 10px 1px grey;
+.navbar {
+  height: 0rem;
+  background-color: white !important;
+  box-shadow: 0 3px 10px 1px grey;
 }
+/* Navbar */
+
+/* Login Modal */
+.modal-title {
+  width: 100%;
+}
+.modal-content {
+  width: 70%;
+  overflow: hidden;
+}
+.card {
+  transition: all 2s ease-in;
+  height: 5.5rem;
+  width: 100%;
+  margin: 1.5rem auto;
+}
+.card {
+  transition: all 0.5s ease-in-out;
+  height: 5.5rem;
+  width: 100%;
+  margin: 1.5rem auto;
+}
+.modal-body .btn-danger {
+  margin: 0;
+  font-size: 1.4rem;
+  width: 100%;
+  height: 4.5rem;
+}
+.card h4 {
+  margin: auto 1.45rem;
+}
+.card Img {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+.card-body {
+  display: flex;
+}
+.card:nth-child(1):hover {
+  background-color: #f4f4f4;
+}
+.card:nth-child(2) {
+  background-color: #395999;
+  color: white;
+}
+.card:nth-child(2):hover {
+  background-color: #253b68;
+}
+
+/* Login Form */
+.login-form input {
+  height: 3.5rem;
+  width: 100%;
+  margin: 1.5rem auto;
+}
+/* Login Form */
+
+/* Login Modal */
