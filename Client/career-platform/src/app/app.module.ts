@@ -5,11 +5,18 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./navbar/navbar.component";
-import { SpinnerComponent } from './navbar/spinner/spinner.component';
+import { SpinnerComponent } from "./navbar/spinner/spinner.component";
+import { AppRoutingModule } from "./app.routing.module";
+import { HomeComponent } from "./home/home.component";
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, SpinnerComponent],
-  imports: [FormsModule, BrowserModule, HttpClientModule],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    SpinnerComponent,
+    HomeComponent,
+  ],
+  imports: [FormsModule, BrowserModule, HttpClientModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })
