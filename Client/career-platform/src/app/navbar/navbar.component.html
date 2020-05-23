@@ -97,7 +97,16 @@
               id="recipient-name"
               ngModel
               name="username"
+              required
+              email
+              #checkUsername="ngModel"
             />
+            <span
+              class="help-block"
+              *ngIf="!checkUsername.valid && checkUsername.touched"
+              s
+              >Please Enter A Valid Email</span
+            >
           </div>
           <div class="form-group">
             <input
@@ -107,9 +116,22 @@
               id="recipient-password"
               ngModel
               name="password"
+              required
+              #checkPassword="ngModel"
             />
+            <span
+              class="help-block"
+              *ngIf="!checkPassword.valid && checkPassword.touched"
+              s
+              >Please Enter A Valid Password</span
+            >
           </div>
-          <button type="button" type="submit" class="btn btn-danger">
+          <button
+            type="button"
+            type="submit"
+            class="btn btn-danger"
+            [disabled]="!formData.valid"
+          >
             Log In
           </button>
         </form>
