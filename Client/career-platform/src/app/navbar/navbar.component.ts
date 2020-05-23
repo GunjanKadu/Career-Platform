@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 
 @Component({
@@ -7,11 +7,13 @@ import { NgForm } from "@angular/forms";
   styleUrls: ["./navbar.component.css"],
 })
 export class NavbarComponent implements OnInit {
+  @ViewChild("formData", { static: true }) signUpForm: NgForm;
+
   constructor() {}
 
   ngOnInit() {}
 
-  onSubmitLogin(formData: NgForm) {
-    console.log(formData);
+  onSubmitLogin() {
+    console.log(this.signUpForm);
   }
 }
