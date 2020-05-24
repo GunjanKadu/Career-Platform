@@ -58,8 +58,10 @@
         aria-expanded="false"
         style="border-radius: 50%; width: 4rem; height: 4rem;"
       >
-        {{ user.user.firstName.slice(0, 1) }}
-        {{ user.user.lastName.slice(0, 1) }}
+        <span *ngIf="user">
+          {{ user.user.firstName.slice(0, 1)
+          }}{{ user.user.lastName.slice(0, 1) }}
+        </span>
       </button>
       <div
         class="dropdown-menu dropdown-menu-right"
@@ -71,11 +73,16 @@
             class="btn btn-secondary"
             style="border-radius: 50%; width: 4rem; height: 4rem;"
           >
-            {{ user.user.firstName.slice(0) }} {{ user.user.lastName.slice(0) }}
+            <span *ngIf="user">
+              {{ user.user.firstName.slice(0, 1)
+              }}{{ user.user.lastName.slice(0, 1) }}
+            </span>
           </button>
           <div class="name">
             <p style="margin-top: 1.1rem;">
-              {{ user.user.firstName }} {{ user.user.lastName }}
+              <span *ngIf="user">
+                {{ user.user.firstName }} {{ user.user.lastName }}
+              </span>
             </p>
             <p style="margin-top: -1rem;">{{ user.user.email }}</p>
           </div>

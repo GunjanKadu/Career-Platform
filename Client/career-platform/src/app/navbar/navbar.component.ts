@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
   public password: string;
   public error: string = null;
   public isLoading: boolean;
-  public user: IState;
+  public user: IState = null;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -51,22 +51,23 @@ export class NavbarComponent implements OnInit {
       password: this.password,
     };
 
-    setTimeout(
-      () =>
-        this.authenticationService.loginService(user).subscribe(
-          (response: any) => {
-            this.loginFormData.reset();
-            this.isLoading = false;
-            this.closeLoginModal.nativeElement.click();
-            this.store.dispatch(new Action.AddToken(response));
-            console.log(response);
-          },
-          (error: any) => {
-            this.isLoading = false;
-            this.error = "Invalid UserName Or Password";
-          }
-        ),
-      1000
+    this.authenticationService.loginService(user).subscribe(
+      (response: any) => {
+        this.store.dispatch(new Action.AddToken(response));
+        this.isLoading = false;
+        this.closeLoginModal.nativeElement.click();
+        this.authenticationService
+          .fetchSingleUser(this.userName)
+          .subscribe((user: IUser) =>
+            this.store.dispatch(new Action.AddUser(user))
+          );
+        console.log(response);
+        this.loginFormData.reset();
+      },
+      (error: any) => {
+        this.isLoading = false;
+        this.error = "Invalid UserName Or Password";
+      }
     );
   }
 
