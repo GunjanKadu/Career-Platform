@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthenticationService, User } from "./authenticationService";
+import { Store } from "@ngrx/store";
+import { IState } from "../redux/types/authenticationTypes";
+import * as Action from "../redux/actions/action";
 
 @Component({
   selector: "app-navbar",
@@ -24,7 +27,10 @@ export class NavbarComponent implements OnInit {
   public error: string = null;
   public isLoading: boolean;
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private store: Store<{ authentication: IState }>
+  ) {}
 
   ngOnInit() {}
 
@@ -45,6 +51,7 @@ export class NavbarComponent implements OnInit {
             this.loginFormData.reset();
             this.isLoading = false;
             this.closeLoginModal.nativeElement.click();
+            this.store.dispatch(new Action.AddToken(response));
             console.log(response);
           },
           (error: any) => {
