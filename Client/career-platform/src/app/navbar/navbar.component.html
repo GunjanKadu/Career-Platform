@@ -33,13 +33,19 @@
         <button
           class="btn btn-dark"
           data-toggle="modal"
-          data-target="#exampleModalCenter"
+          data-target="#loginModal"
         >
           Log In
         </button>
       </li>
       <li class="nav-item">
-        <button class="btn btn-danger">Sign Up</button>
+        <button
+          class="btn btn-danger"
+          data-toggle="modal"
+          data-target="#signupModal"
+        >
+          Sign Up
+        </button>
       </li>
     </ul>
   </div>
@@ -49,7 +55,7 @@
 <!-- Login -->
 <div
   class="modal fade"
-  id="exampleModalCenter"
+  id="loginModal"
   tabindex="-1"
   role="dialog"
   aria-labelledby="exampleModalCenterTitle"
@@ -88,7 +94,7 @@
         <form
           class="login-form"
           (ngSubmit)="onSubmitLogin()"
-          #formData="ngForm"
+          #loginFormData="ngForm"
         >
           <div class="form-group">
             <span class="help-block" *ngIf="error">{{ error }}</span>
@@ -131,7 +137,7 @@
             type="button"
             type="submit"
             class="btn btn-danger"
-            [disabled]="!formData.valid"
+            [disabled]="!loginFormData.valid"
           >
             <app-spinner *ngIf="isLoading"></app-spinner>
             <span *ngIf="!isLoading"> Log In</span>
@@ -140,7 +146,12 @@
 
         <p style="margin-top: 2.5rem; text-align: center;">
           Dont have an account?
-          <button style="color: #395999; border: none;">
+          <button
+            style="color: #395999; border: none;"
+            data-toggle="modal"
+            data-dismiss="modal"
+            data-target="#signupModal"
+          >
             <strong>Sign Up</strong>
           </button>
         </p>
@@ -149,3 +160,136 @@
   </div>
 </div>
 <!-- Login -->
+
+<!-- SignUp -->
+<div
+  class="modal fade"
+  id="signupModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalSignUpLongTitle">
+          Signup And Start Learning
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          #closeModal
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="login-form"
+          (ngSubmit)="onSubmitSignup()"
+          #signUpFormData="ngForm"
+        >
+          <div class="form-group">
+            <span class="help-block" *ngIf="error">{{ error }}</span>
+            <input
+              type="text"
+              placeholder="First Name"
+              class="form-control"
+              id="signup-recipient-fname"
+              ngModel
+              name="firstName"
+              required
+              #checkFirstName="ngModel"
+            />
+            <span
+              class="help-block"
+              *ngIf="!checkFirstName.valid && checkFirstName.touched"
+              s
+              >Please Enter You First Name</span
+            >
+          </div>
+          <div class="form-group">
+            <span class="help-block" *ngIf="error">{{ error }}</span>
+            <input
+              type="text"
+              placeholder="Last Name"
+              class="form-control"
+              id="signup-recipient-lfname"
+              ngModel
+              name="lastName"
+              required
+              #checkLastname="ngModel"
+            />
+            <span
+              class="help-block"
+              *ngIf="!checkLastname.valid && checkLastname.touched"
+              s
+              >Please Enter You Last Name</span
+            >
+          </div>
+          <div class="form-group">
+            <span class="help-block" *ngIf="error">{{ error }}</span>
+            <input
+              type="email"
+              placeholder="Email"
+              class="form-control"
+              id="signup-recipient-email"
+              ngModel
+              name="email"
+              required
+              email
+              #checkEmailname="ngModel"
+            />
+            <span
+              class="help-block"
+              *ngIf="!checkEmailname.valid && checkEmailname.touched"
+              s
+              >Please Enter A Valid Email</span
+            >
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              placeholder="Password"
+              class="form-control"
+              id="signup-recipient-password"
+              ngModel
+              name="signUpPassword"
+              required
+              minlength="6"
+              #checkSignUpPassword="ngModel"
+            />
+            <span
+              class="help-block"
+              *ngIf="!checkSignUpPassword.valid && checkSignUpPassword.touched"
+              >Please Enter A Valid Password</span
+            >
+          </div>
+          <button
+            type="button"
+            type="submit"
+            class="btn btn-danger"
+            [disabled]="!signUpFormData.valid"
+          >
+            <app-spinner *ngIf="isLoading"></app-spinner>
+            <span *ngIf="!isLoading"> Sign Up</span>
+          </button>
+        </form>
+        <p style="margin-top: 2.5rem; text-align: center;">
+          Already have an account?
+          <button
+            style="color: #395999; border: none;"
+            data-toggle="modal"
+            data-target="#loginModal"
+            data-dismiss="modal"
+          >
+            <strong>Log In</strong>
+          </button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

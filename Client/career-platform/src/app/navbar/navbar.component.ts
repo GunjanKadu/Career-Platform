@@ -9,9 +9,13 @@ import { AuthenticationService } from "./authenticationService";
   styleUrls: ["./navbar.component.css"],
 })
 export class NavbarComponent implements OnInit {
-  @ViewChild("formData", { static: true }) signUpForm: NgForm;
-  @ViewChild("closeModal", { static: true }) closeModal: ElementRef;
+  @ViewChild("loginFormData", { static: false }) loginFormData: NgForm;
+  @ViewChild("signUpFormData", { static: false }) signUpFormData: NgForm;
+  @ViewChild("closeModal", { static: false }) closeModal: ElementRef;
 
+  public firstName: string;
+  public lastName: string;
+  public email: string;
   public userName: string;
   public password: string;
   public error: string = null;
@@ -22,8 +26,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {}
 
   onSubmitLogin() {
-    this.userName = this.signUpForm.value.username;
-    this.password = this.signUpForm.value.password;
+    this.userName = this.loginFormData.value.username;
+    this.password = this.loginFormData.value.password;
     this.isLoading = true;
 
     setTimeout(
@@ -32,7 +36,7 @@ export class NavbarComponent implements OnInit {
           .loginService(this.userName, this.password)
           .subscribe(
             (response: any) => {
-              this.signUpForm.reset();
+              this.loginFormData.reset();
               this.isLoading = false;
               this.closeModal.nativeElement.click();
               console.log(response);
@@ -45,5 +49,15 @@ export class NavbarComponent implements OnInit {
           ),
       1000
     );
+  }
+
+  onSubmitSignup() {
+    this.firstName = this.signUpFormData.value.firstName;
+    this.lastName = this.signUpFormData.value.lastName;
+    this.password = this.signUpFormData.value.signUpPassword;
+    this.email = this.signUpFormData.value.email;
+    this.isLoading = true;
+
+    console.log(this.signUpFormData);
   }
 }
