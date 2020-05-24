@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
+import * as URL from "../url";
+
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
   constructor(private http: HttpClient) {}
@@ -10,7 +12,7 @@ export class AuthenticationService {
       "Content-Type": "application/json",
     });
     return this.http.post(
-      "http://localhost:8080/api/login",
+      URL.LOGIN,
       {
         userName: user.username,
         passwordString: user.password,
@@ -19,12 +21,20 @@ export class AuthenticationService {
     );
   }
 
+  fetchSingleUser(userName: string) {
+    const token = sessionStorage.getItem("token");
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post(URL.FETCHUSER, userName, { headers });
+  }
   signupService(user: User) {
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
     });
     return this.http.post(
-      "http://localhost:8080/api/signin",
+      URL.SIGNUP,
       {
         firstName: user.firstName,
         lastName: user.lastName,
