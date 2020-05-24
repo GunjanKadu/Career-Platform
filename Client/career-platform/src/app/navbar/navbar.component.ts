@@ -5,7 +5,7 @@ import { Store } from "@ngrx/store";
 
 import * as Action from "../redux/actions/action";
 import { RootState } from "../redux";
-import { IUser } from "../redux/types/authenticationTypes";
+import { IUser, IState } from "../redux/types/authenticationTypes";
 
 @Component({
   selector: "app-navbar",
@@ -17,7 +17,9 @@ export class NavbarComponent implements OnInit {
   @ViewChild("signUpFormData", { static: false }) signUpFormData: NgForm;
   @ViewChild("closeLoginModal", { static: false }) closeLoginModal: ElementRef;
   // prettier-ignore
-  @ViewChild("closeSignUpModal", { static: false }) closeSignUpModal: ElementRef;
+  @ViewChild("loginModalToggle", { static: false }) loginModalToggle: ElementRef;
+  // prettier-ignore
+  @ViewChild("closeSignUpModal", { static: false })closeSignUpModal: ElementRef;
 
   public firstName: string;
   public lastName: string;
@@ -26,13 +28,20 @@ export class NavbarComponent implements OnInit {
   public password: string;
   public error: string = null;
   public isLoading: boolean;
+  public isUserAuthenticated: boolean;
 
   constructor(
     private authenticationService: AuthenticationService,
     private store: Store<RootState>
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store
+      .select("authentication")
+      .subscribe(
+        (state: IState) => (this.isUserAuthenticated = state.authenticated)
+      );
+  }
 
   onSubmitLogin() {
     this.userName = this.loginFormData.value.username;
@@ -82,6 +91,7 @@ export class NavbarComponent implements OnInit {
         (res: IUser) => {
           this.signUpFormData.reset();
           this.closeSignUpModal.nativeElement.click();
+          this.loginModalToggle.nativeElement.click();
           this.isLoading = false;
           this.store.dispatch(new Action.AddUser(res));
         },

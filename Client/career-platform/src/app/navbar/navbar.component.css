@@ -14,6 +14,15 @@
   background-color: white !important;
   box-shadow: 0 3px 10px 1px grey;
 }
+.information {
+  display: flex;
+}
+.information .name {
+  margin: auto;
+}
+.information .btn {
+  margin: auto;
+}
 /* Navbar */
 
 /* Login Modal */
