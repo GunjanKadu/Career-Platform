@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AuthenticationService } from "./authenticationService";
+import { AuthenticationService, User } from "./authenticationService";
 
 @Component({
   selector: "app-navbar",
@@ -11,7 +11,10 @@ import { AuthenticationService } from "./authenticationService";
 export class NavbarComponent implements OnInit {
   @ViewChild("loginFormData", { static: false }) loginFormData: NgForm;
   @ViewChild("signUpFormData", { static: false }) signUpFormData: NgForm;
-  @ViewChild("closeModal", { static: false }) closeModal: ElementRef;
+
+  @ViewChild("closeLoginModal", { static: false }) closeLoginModal: ElementRef;
+  @ViewChild("closeSignUpModal", { static: false })
+  closeSignUpModal: ElementRef;
 
   public firstName: string;
   public lastName: string;
@@ -30,23 +33,26 @@ export class NavbarComponent implements OnInit {
     this.password = this.loginFormData.value.password;
     this.isLoading = true;
 
+    const user: User = {
+      username: this.userName,
+      password: this.password,
+    };
+
     setTimeout(
       () =>
-        this.authenticationService
-          .loginService(this.userName, this.password)
-          .subscribe(
-            (response: any) => {
-              this.loginFormData.reset();
-              this.isLoading = false;
-              this.closeModal.nativeElement.click();
-              console.log(response);
-            },
-            (error: any) => {
-              this.isLoading = false;
-              this.error = "Invalid UserName Or Password";
-              setTimeout(() => (this.error = null), 2500);
-            }
-          ),
+        this.authenticationService.loginService(user).subscribe(
+          (response: any) => {
+            this.loginFormData.reset();
+            this.isLoading = false;
+            this.closeLoginModal.nativeElement.click();
+            console.log(response);
+          },
+          (error: any) => {
+            this.isLoading = false;
+            this.error = "Invalid UserName Or Password";
+            setTimeout(() => (this.error = null), 2500);
+          }
+        ),
       1000
     );
   }
@@ -57,6 +63,32 @@ export class NavbarComponent implements OnInit {
     this.password = this.signUpFormData.value.signUpPassword;
     this.email = this.signUpFormData.value.email;
     this.isLoading = true;
+
+    const user: User = {
+      firstName: this.userName,
+      lastName: this.lastName,
+      email: this.email,
+      password: this.password,
+    };
+
+    setTimeout(() => {
+      this.authenticationService.signupService(user).subscribe(
+        (res) => {
+          this.signUpFormData.reset();
+          this.closeSignUpModal.nativeElement.click();
+          this.isLoading = false;
+          console.log(res);
+        },
+        (err) => {
+          this.isLoading = false;
+          // tslint:disable-next-line: max-line-length
+          err.error.message === "UserName Already Exists"
+            ? (this.error = "Email already exists please try to login.")
+            : (this.error = err.error.message);
+          console.log(err);
+        }
+      );
+    }, 1000);
 
     console.log(this.signUpFormData);
   }

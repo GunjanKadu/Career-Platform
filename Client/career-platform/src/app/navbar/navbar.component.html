@@ -72,7 +72,7 @@
           class="close"
           data-dismiss="modal"
           aria-label="Close"
-          #closeModal
+          #closeLoginModal
         >
           <span aria-hidden="true">&times;</span>
         </button>
@@ -181,7 +181,7 @@
           class="close"
           data-dismiss="modal"
           aria-label="Close"
-          #closeModal
+          #closeSignUpModal
         >
           <span aria-hidden="true">&times;</span>
         </button>
@@ -212,7 +212,6 @@
             >
           </div>
           <div class="form-group">
-            <span class="help-block" *ngIf="error">{{ error }}</span>
             <input
               type="text"
               placeholder="Last Name"
@@ -231,7 +230,6 @@
             >
           </div>
           <div class="form-group">
-            <span class="help-block" *ngIf="error">{{ error }}</span>
             <input
               type="email"
               placeholder="Email"
