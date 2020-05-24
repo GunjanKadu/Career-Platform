@@ -1,6 +1,7 @@
 export interface IState {
   token: string;
   user: IUser;
+  authenticated: boolean;
 }
 
 export interface IUser {

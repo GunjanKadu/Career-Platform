@@ -28,12 +28,13 @@
         Search
       </button>
     </form>
-    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+    <ul *ngIf="isUserAuthenticated" class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item">
         <button
           class="btn btn-dark"
           data-toggle="modal"
           data-target="#loginModal"
+          #loginModalToggle
         >
           Log In
         </button>
@@ -48,6 +49,42 @@
         </button>
       </li>
     </ul>
+    <div class="btn-group ml-auto" *ngIf="!isUserAuthenticated">
+      <button
+        type="button"
+        class="btn btn-secondary dropdown-toggle"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+        style="border-radius: 50%; width: 4rem; height: 4rem;"
+      >
+        GK
+      </button>
+      <div
+        class="dropdown-menu dropdown-menu-right"
+        style="width: 23rem; font-size: small;"
+      >
+        <div class="information">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            style="border-radius: 50%; width: 4rem; height: 4rem;"
+          >
+            GK
+          </button>
+          <div class="name">
+            <p style="margin-top: 1.1rem;">Gunjan Kadu</p>
+            <p style="margin-top: -1rem;">agunjan.kadu@gmail.com</p>
+          </div>
+        </div>
+        <hr />
+        <a class="dropdown-item" href="#">Add Details</a>
+        <a class="dropdown-item" href="#">Add Course</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item">Logout</a>
+      </div>
+    </div>
   </div>
 </nav>
 <!-- Navbar -->
