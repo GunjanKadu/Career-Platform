@@ -5,6 +5,7 @@ import { Store } from "@ngrx/store";
 
 import * as Action from "../redux/actions/action";
 import { RootState } from "../redux";
+import { IUser } from "../redux/types/authenticationTypes";
 
 @Component({
   selector: "app-navbar",
@@ -70,7 +71,7 @@ export class NavbarComponent implements OnInit {
     this.isLoading = true;
 
     const user: User = {
-      firstName: this.userName,
+      firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
       password: this.password,
@@ -78,10 +79,11 @@ export class NavbarComponent implements OnInit {
 
     setTimeout(() => {
       this.authenticationService.signupService(user).subscribe(
-        (res) => {
+        (res: IUser) => {
           this.signUpFormData.reset();
           this.closeSignUpModal.nativeElement.click();
           this.isLoading = false;
+          this.store.dispatch(new Action.AddUser(res));
         },
         (err) => {
           this.isLoading = false;
