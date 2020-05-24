@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
   public password: string;
   public error: string = null;
   public isLoading: boolean;
-  public isUserAuthenticated: boolean;
+  public user: IState;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -38,9 +38,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.store
       .select("authentication")
-      .subscribe(
-        (state: IState) => (this.isUserAuthenticated = state.authenticated)
-      );
+      .subscribe((state: IState) => (this.user = state));
   }
 
   onSubmitLogin() {
@@ -107,5 +105,9 @@ export class NavbarComponent implements OnInit {
   }
   disableError() {
     this.error = null;
+  }
+  onLogout() {
+    console.log("logout");
+    this.store.dispatch(new Action.Logout());
   }
 }
