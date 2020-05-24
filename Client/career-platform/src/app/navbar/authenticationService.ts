@@ -26,9 +26,9 @@ export class AuthenticationService {
     return this.http.post(
       "http://localhost:8080/api/signin",
       {
-        password: user.password,
         firstName: user.firstName,
         lastName: user.lastName,
+        password: user.password,
         email: user.email,
       },
       { headers }

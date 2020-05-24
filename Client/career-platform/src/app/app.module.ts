@@ -11,7 +11,7 @@ import { NavbarComponent } from "./navbar/navbar.component";
 import { SpinnerComponent } from "./navbar/spinner/spinner.component";
 import { AppRoutingModule } from "./app.routing.module";
 import { HomeComponent } from "./home/home.component";
-import { AuthenticationReducer } from "./redux/reducers/Authentication";
+import { rootReducer } from "./redux";
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { AuthenticationReducer } from "./redux/reducers/Authentication";
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot({ authentication: AuthenticationReducer }),
+    StoreModule.forRoot(rootReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
