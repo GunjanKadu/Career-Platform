@@ -4,7 +4,7 @@ import { IUser } from "../types/authenticationTypes";
 // Authentication
 export const ADD_TOKEN = "ADD_TOKEN";
 export const ADD_USER = "ADD_USER";
-
+export const LOGOUT = "LOGOUT";
 export class AddToken implements Action {
   readonly type: string = ADD_TOKEN;
   public payload: string;
@@ -22,5 +22,8 @@ export class AddUser implements Action {
     this.payload = payload;
   }
 }
+export class Logout implements Action {
+  type: string = LOGOUT;
+}
 
-export type authenticationtypes = AddToken & AddUser;
+export type authenticationtypes = AddToken & AddUser & Logout;
