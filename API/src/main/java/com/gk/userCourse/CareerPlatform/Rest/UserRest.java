@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -39,9 +38,7 @@ public class UserRest {
         if (userName.length() < 0) {
             throw new UserNotFoundExecption("User Name Not Found - " + userName);
         }
-        List<User> allUsers = userService.findAll();
-        List<User> foundUser = allUsers.stream().filter(User -> User.getEmail().equals(userName)).collect(Collectors.toList());
-        return foundUser.get(0);
+        return userService.findByUserName(userName);
     }
 
     @PostMapping("/users")
