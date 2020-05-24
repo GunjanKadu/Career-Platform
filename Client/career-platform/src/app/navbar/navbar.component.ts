@@ -50,7 +50,6 @@ export class NavbarComponent implements OnInit {
           (error: any) => {
             this.isLoading = false;
             this.error = "Invalid UserName Or Password";
-            setTimeout(() => (this.error = null), 2500);
           }
         ),
       1000
@@ -77,7 +76,6 @@ export class NavbarComponent implements OnInit {
           this.signUpFormData.reset();
           this.closeSignUpModal.nativeElement.click();
           this.isLoading = false;
-          console.log(res);
         },
         (err) => {
           this.isLoading = false;
@@ -85,11 +83,11 @@ export class NavbarComponent implements OnInit {
           err.error.message === "UserName Already Exists"
             ? (this.error = "Email already exists please try to login.")
             : (this.error = err.error.message);
-          console.log(err);
         }
       );
     }, 1000);
-
-    console.log(this.signUpFormData);
+  }
+  disableError() {
+    this.error = null;
   }
 }

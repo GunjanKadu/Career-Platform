@@ -107,6 +107,7 @@
               name="username"
               required
               email
+              (ngModelChange)="disableError()"
               #checkUsername="ngModel"
             />
             <span
@@ -125,6 +126,7 @@
               ngModel
               name="password"
               required
+              (ngModelChange)="disableError()"
               #checkPassword="ngModel"
             />
             <span
@@ -239,6 +241,7 @@
               name="email"
               required
               email
+              (ngModelChange)="disableError()"
               #checkEmailname="ngModel"
             />
             <span
