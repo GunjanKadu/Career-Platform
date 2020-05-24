@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { Router } from "@angular/router";
 import { AuthenticationService, User } from "./authenticationService";
 import { Store } from "@ngrx/store";
-import { IState } from "../redux/types/authenticationTypes";
+
 import * as Action from "../redux/actions/action";
+import { RootState } from "../redux";
 
 @Component({
   selector: "app-navbar",
@@ -14,10 +14,9 @@ import * as Action from "../redux/actions/action";
 export class NavbarComponent implements OnInit {
   @ViewChild("loginFormData", { static: false }) loginFormData: NgForm;
   @ViewChild("signUpFormData", { static: false }) signUpFormData: NgForm;
-
   @ViewChild("closeLoginModal", { static: false }) closeLoginModal: ElementRef;
-  @ViewChild("closeSignUpModal", { static: false })
-  closeSignUpModal: ElementRef;
+  // prettier-ignore
+  @ViewChild("closeSignUpModal", { static: false }) closeSignUpModal: ElementRef;
 
   public firstName: string;
   public lastName: string;
@@ -29,7 +28,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private store: Store<{ authentication: IState }>
+    private store: Store<RootState>
   ) {}
 
   ngOnInit() {}
