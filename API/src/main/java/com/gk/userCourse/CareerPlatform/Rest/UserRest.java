@@ -33,8 +33,8 @@ public class UserRest {
         return userService.findbyId(userId);
     }
 
-    @PostMapping("/users/getByUserName")
-    public User getSingleUser(@RequestBody String userName) {
+    @GetMapping("/users/getByUserName")
+    public User getSingleUser(@RequestParam String userName) {
         if (userName.length() < 0) {
             throw new UserNotFoundExecption("User Name Not Found - " + userName);
         }
