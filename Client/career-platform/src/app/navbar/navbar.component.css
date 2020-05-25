@@ -1,4 +1,7 @@
 /* Navbar */
+.navbar {
+  margin-bottom: 0;
+}
 .logo {
   height: 6rem;
   width: 12rem;
@@ -22,6 +25,20 @@
 }
 .information .btn {
   margin: auto;
+}
+.mycourses {
+  margin-left: 29vw;
+  color: #8e8a8a;
+}
+.mycourses button {
+  border: none;
+  background: white;
+}
+.mycourses button:hover {
+  background-color: #d0d0d0;
+}
+.mycourses button:nth-child(2):hover {
+  background-color: white;
 }
 /* Navbar */
 

@@ -22,7 +22,7 @@
         type="search"
         placeholder="Search for anything"
         aria-label="Search"
-        style="width: 20vw; height: 3.5rem;"
+        style="width: 26vw; height: 3.5rem;"
       />
       <button class="btn btn-outline-danger my-2 mx-2 my-sm-0" type="submit">
         Search
@@ -49,6 +49,11 @@
         </button>
       </li>
     </ul>
+    <div class="teach mycourses" *ngIf="user.authenticated">
+      <button class="btn">Teach On Udemy</button>
+      <button disabled style="color: black;">|</button>
+      <button class="btn">My Courses ▼</button>
+    </div>
     <div class="btn-group ml-auto" *ngIf="user.authenticated">
       <button
         type="button"
@@ -58,7 +63,7 @@
         aria-expanded="false"
         style="border-radius: 50%; width: 4rem; height: 4rem;"
       >
-        <span *ngIf="user">
+        <span *ngIf="user.user">
           {{ user.user.firstName.slice(0, 1)
           }}{{ user.user.lastName.slice(0, 1) }}
         </span>
@@ -73,18 +78,20 @@
             class="btn btn-secondary"
             style="border-radius: 50%; width: 4rem; height: 4rem;"
           >
-            <span *ngIf="user">
+            <span *ngIf="user.user">
               {{ user.user.firstName.slice(0, 1)
               }}{{ user.user.lastName.slice(0, 1) }}
             </span>
           </button>
           <div class="name">
             <p style="margin-top: 1.1rem;">
-              <span *ngIf="user">
+              <span *ngIf="user.user">
                 {{ user.user.firstName }} {{ user.user.lastName }}
               </span>
             </p>
-            <p style="margin-top: -1rem;">{{ user.user.email }}</p>
+            <p style="margin-top: -1rem;" *ngIf="user.user">
+              {{ user.user.email }}
+            </p>
           </div>
         </div>
         <hr />
