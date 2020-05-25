@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import * as URL from "../url";
+import { IUser } from "../redux/types/authenticationTypes";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
@@ -27,13 +28,13 @@ export class AuthenticationService {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     });
-    return this.http.post(URL.FETCHUSER, userName, { headers });
+    return this.http.post<IUser>(URL.FETCHUSER, userName, { headers });
   }
   signupService(user: User) {
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
     });
-    return this.http.post(
+    return this.http.post<IUser>(
       URL.SIGNUP,
       {
         firstName: user.firstName,
