@@ -1,0 +1,45 @@
+#home {
+  height: 100vh;
+  width: 100vw;
+}
+#home::before {
+  content: "";
+  background: url("../../assets/img/cover.jpg") no-repeat center center/cover;
+  opacity: 0.95;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  z-index: -1;
+}
+#quote {
+  width: 95%;
+  height: 60%;
+  display: flex;
+  justify-content: flex-end;
+}
+#quote .content {
+  color: white;
+  margin: 26rem 0px;
+}
+#quote .content h1 {
+  filter: brightness(200%);
+  font-weight: bolder;
+  font-size: 40px;
+}
+#quote input {
+  margin-top: 3rem;
+  color: black;
+  width: 100%;
+  height: 4rem;
+  border-radius: 5px;
+  border: none;
+  padding-left: 5px;
+}
+#quote button {
+  margin: 2rem auto;
+  width: 100%;
+  height: 4rem;
+  font-size: 18px;
+}
