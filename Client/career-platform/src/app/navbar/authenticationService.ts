@@ -28,7 +28,7 @@ export class AuthenticationService {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     });
-    return this.http.post<IUser>(URL.FETCHUSER, userName, { headers });
+    return this.http.get<IUser>(URL.FETCHUSER + userName, { headers });
   }
   signupService(user: User) {
     const headers = new HttpHeaders({
