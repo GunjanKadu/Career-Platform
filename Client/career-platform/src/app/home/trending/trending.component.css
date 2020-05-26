@@ -31,3 +31,44 @@
 #trending-course .courses .card:nth-child(n + 2) {
   padding: 0;
 }
+
+/* skeleton */
+.skeletonCard {
+  border: none;
+}
+.skeletonCardImg {
+  background-color: rgba(58, 57, 57, 0.3);
+  width: 313px;
+  height: 208px;
+  margin-bottom: 2rem;
+  animation: sweep 2s infinite;
+  transform-origin: 0 50%;
+}
+.skeletonCardBody {
+  height: 36px;
+  padding: 0;
+}
+.skeletonCardTitle {
+  background-color: rgba(58, 57, 57, 0.3);
+  width: 313px;
+  padding: 0;
+  height: 16px;
+  animation: sweep 2s infinite;
+  transform-origin: 0 50%;
+}
+.skeletonCardText {
+  background-color: rgba(58, 57, 57, 0.3);
+  width: 313px;
+  padding: 0;
+  height: 16px;
+  animation: sweep 2s infinite;
+  transform-origin: 0 50%;
+}
+@keyframes sweep {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

@@ -17,7 +17,11 @@
       </div>
     </div>
     <ng-container *ngIf="trendingCourses; else skeleton">
-      <div class="card col-2" *ngFor="let course of trendingCourses">
+      <div
+        class="card col-2"
+        style="cursor: pointer;"
+        *ngFor="let course of trendingCourses"
+      >
         <img
           class="card-img-top"
           src="{{ course.image }}"
@@ -56,3 +60,40 @@
     </ng-container>
   </div>
 </div>
+
+<!-- Skeleton -->
+<ng-template #skeleton>
+  <div class="card col-2 skeletonCard" style="height: 300px; width: 200px;">
+    <div class="card-img-top skeletonCardImg"></div>
+    <div class="card-body skeletonCardBody">
+      <h4 class="card-title skeletonCardTitle"></h4>
+      <p class="card-text skeletonCardText"></p>
+      <p class="card-text skeletonCardText"></p>
+    </div>
+  </div>
+  <div class="card col-2 skeletonCard" style="height: 300px; width: 200px;">
+    <div class="card-img-top skeletonCardImg"></div>
+    <div class="card-body skeletonCardBody">
+      <h4 class="card-title skeletonCardTitle"></h4>
+      <p class="card-text skeletonCardText"></p>
+      <p class="card-text skeletonCardText"></p>
+    </div>
+  </div>
+  <div class="card col-2 skeletonCard" style="height: 300px; width: 200px;">
+    <div class="card-img-top skeletonCardImg"></div>
+    <div class="card-body skeletonCardBody">
+      <h4 class="card-title skeletonCardTitle"></h4>
+      <p class="card-text skeletonCardText"></p>
+      <p class="card-text skeletonCardText"></p>
+    </div>
+  </div>
+  <div class="card col-2 skeletonCard" style="height: 300px; width: 200px;">
+    <div class="card-img-top skeletonCardImg"></div>
+    <div class="card-body skeletonCardBody">
+      <h4 class="card-title skeletonCardTitle"></h4>
+      <p class="card-text skeletonCardText"></p>
+      <p class="card-text skeletonCardText"></p>
+    </div>
+  </div>
+</ng-template>
+<!-- Skeleton -->
