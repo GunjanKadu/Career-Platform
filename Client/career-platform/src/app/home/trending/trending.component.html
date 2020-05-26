@@ -1,0 +1,58 @@
+<div id="trending-course">
+  <div class="scroll-to row">
+    <button class="btn btn-danger" (click)="scrollTo(target)">
+      View Trending Courses ▼
+    </button>
+  </div>
+  <div class="courses row" #target>
+    <div class="card col-3 description">
+      <div class="card-body">
+        <p class="card-text" style="font-weight: bold;">
+          The Best Selection of development courses
+        </p>
+        <p>
+          Choose from over 1000 online video courses with new additions
+          published every month
+        </p>
+      </div>
+    </div>
+    <ng-container *ngIf="trendingCourses; else skeleton">
+      <div class="card col-2" *ngFor="let course of trendingCourses">
+        <img
+          class="card-img-top"
+          src="{{ course.image }}"
+          style="height: 208px;"
+          alt="React"
+        />
+        <div class="card-body">
+          <h4
+            style="font-weight: bold; height: 36px; margin-bottom: 15px;"
+            class="card-title"
+          >
+            {{ course.courseName }}
+          </h4>
+          <p class="card-text" style="font-size: 11px;">
+            {{ course.author }}
+          </p>
+          <star-rating
+            value="{{ course.rating }}"
+            checkedcolor="#f5c251"
+            uncheckedcolor="#dedfe0"
+            size="24px"
+            readonly="false"
+          ></star-rating>
+          <p
+            style="text-align: right; font-weight: bold; font-size: 15px;"
+            class="card-text"
+          >
+            <small
+              style="font-weight: bold; font-size: 15px;"
+              class="text-muted"
+              >€ {{ course.price }}</small
+            >
+          </p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

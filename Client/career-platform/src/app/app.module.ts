@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { RatingModule } from "ng-starrating";
 import { environment } from "src/environments/environment.prod";
 
 import { AppComponent } from "./app.component";
@@ -12,6 +13,7 @@ import { SpinnerComponent } from "./navbar/spinner/spinner.component";
 import { AppRoutingModule } from "./app.routing.module";
 import { HomeComponent } from "./home/home.component";
 import { rootReducer } from "./redux";
+import { TrendingComponent } from "./home/trending/trending.component";
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { rootReducer } from "./redux";
     NavbarComponent,
     SpinnerComponent,
     HomeComponent,
+    TrendingComponent,
   ],
   imports: [
     FormsModule,
@@ -30,6 +33,7 @@ import { rootReducer } from "./redux";
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
+    RatingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

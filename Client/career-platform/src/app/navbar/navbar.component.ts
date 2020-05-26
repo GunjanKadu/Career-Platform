@@ -56,13 +56,14 @@ export class NavbarComponent implements OnInit {
         this.store.dispatch(new Action.AddToken(response));
         this.isLoading = false;
         this.closeLoginModal.nativeElement.click();
+        this.loginFormData.resetForm();
+
         this.authenticationService
           .fetchSingleUser(this.userName)
           .subscribe((user: IUser) =>
             this.store.dispatch(new Action.AddUser(user))
           );
         console.log(response);
-        this.loginFormData.reset();
       },
       (error: any) => {
         this.isLoading = false;
@@ -88,7 +89,7 @@ export class NavbarComponent implements OnInit {
     setTimeout(() => {
       this.authenticationService.signupService(user).subscribe(
         (res: IUser) => {
-          this.signUpFormData.reset();
+          this.signUpFormData.resetForm();
           this.closeSignUpModal.nativeElement.click();
           this.loginModalToggle.nativeElement.click();
           this.isLoading = false;
