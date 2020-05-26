@@ -1,5 +1,5 @@
 #home {
-  height: 100vh;
+  height: 95vh;
   width: 100vw;
 }
 #home::before {
@@ -15,9 +15,10 @@
 }
 #quote {
   width: 95%;
-  height: 60%;
+  height: 100%;
   display: flex;
   justify-content: flex-end;
+  margin-bottom: -14rem;
 }
 #quote .content {
   color: white;
@@ -42,4 +43,7 @@
   width: 100%;
   height: 4rem;
   font-size: 18px;
+}
+#trending-courses {
+  height: 100vh;
 }
