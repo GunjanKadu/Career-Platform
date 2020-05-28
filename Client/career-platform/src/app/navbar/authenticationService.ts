@@ -30,6 +30,7 @@ export class AuthenticationService {
     });
     return this.http.get<IUser>(URL.FETCHUSER + userName, { headers });
   }
+
   signupService(user: User) {
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
@@ -45,12 +46,25 @@ export class AuthenticationService {
       { headers }
     );
   }
+  postUserDetailsBasic(user: IUser) {
+    const token = sessionStorage.getItem("token");
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<IUser>(URL.POSTUSERDETAILSBASIC + user.id, user, {
+      headers,
+    });
+  }
 }
 
 export interface User {
+  id?: number;
   firstName?: string;
   lastName?: string;
   email?: string;
   password?: string;
   username?: string;
+  description?: string;
+  social?: string;
 }

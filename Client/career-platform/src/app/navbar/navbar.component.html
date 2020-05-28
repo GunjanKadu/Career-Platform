@@ -95,7 +95,14 @@
           </div>
         </div>
         <hr />
-        <a class="dropdown-item" href="#">Add Details</a>
+        <a
+          class="dropdown-item"
+          href="#"
+          data-toggle="modal"
+          data-dismiss="modal"
+          data-target="#userDetailModal"
+          >Profile</a
+        >
         <a class="dropdown-item" href="#">Add Course</a>
         <a class="dropdown-item" href="#">Something else here</a>
         <div class="dropdown-divider"></div>
@@ -341,6 +348,120 @@
             <strong>Log In</strong>
           </button>
         </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UserDetails -->
+<div
+  class="modal fade"
+  id="userDetailModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalUserDetails">
+          Details
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          #closeUserDetailsModal
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="login-form"
+          (ngSubmit)="onUserDetailsSubmit()"
+          #userDetailsFormData="ngForm"
+        >
+          <div class="form-group">
+            <span class="help-block" *ngIf="error">{{ error }}</span>
+            <input
+              type="text"
+              placeholder="First Name"
+              class="form-control"
+              id="userFname"
+              [ngModel]="getBasicDetails('fname')"
+              name="firstName"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              placeholder="Last Name"
+              class="form-control"
+              id="userLname"
+              [ngModel]="getBasicDetails('lname')"
+              name="lastName"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              placeholder="Email"
+              class="form-control"
+              id="userEmail"
+              [ngModel]="getBasicDetails('email')"
+              name="email"
+              required
+              email
+              (ngModelChange)="disableError()"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              placeholder="Password"
+              class="form-control"
+              id="userPassword"
+              [ngModel]="getBasicDetails('password')"
+              name="password"
+              required
+              minlength="6"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              placeholder="Add a Headline like ex. Engineer,Architect"
+              class="form-control"
+              id="userHeadline"
+              [ngModel]="getBasicDetails('headline')"
+              name="userHeadline"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              placeholder="Social Media Link"
+              class="form-control"
+              id="userSocial"
+              [ngModel]="getBasicDetails('social')"
+              name="userSocial"
+            />
+          </div>
+          <button
+            type="button"
+            type="submit"
+            class="btn btn-danger"
+            [disabled]="!userDetailsFormData.valid"
+          >
+            <app-spinner *ngIf="isLoading"></app-spinner>
+            <span *ngIf="!isLoading"> Save</span>
+          </button>
+        </form>
       </div>
     </div>
   </div>

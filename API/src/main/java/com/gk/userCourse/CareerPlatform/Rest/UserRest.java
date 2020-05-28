@@ -5,6 +5,7 @@ import com.gk.userCourse.CareerPlatform.Entity.UserDetails;
 import com.gk.userCourse.CareerPlatform.ErrorHandling.UserNotFoundExecption;
 import com.gk.userCourse.CareerPlatform.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,9 @@ import java.util.List;
 public class UserRest {
 
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserRest(UserService theUserService) {
@@ -46,6 +50,21 @@ public class UserRest {
         theUser.setId(0);
         userService.save(theUser);
         return theUser;
+    }
+
+    @PostMapping("/users/{userId}")
+    public User editUser(@PathVariable int userId, @RequestBody User theUser) {
+
+        User tempUser = userService.findbyId(userId);
+        if (tempUser != null) {
+            tempUser.setFirstName(theUser.getFirstName());
+            tempUser.setLastName(theUser.getLastName());
+            tempUser.setEmail(theUser.getEmail());
+            tempUser.setPassword(theUser.getPassword().length() <= 30 ? passwordEncoder.encode(theUser.getPassword()) : theUser.getPassword());
+            tempUser.setUserDetails(theUser.getUserDetails());
+            userService.save(tempUser);
+        }
+        return tempUser;
     }
 
     @PostMapping("/usersDetails/{userId}")

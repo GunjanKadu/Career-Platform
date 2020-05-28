@@ -15,11 +15,15 @@ import { IUser, IState } from "../redux/types/authenticationTypes";
 export class NavbarComponent implements OnInit {
   @ViewChild("loginFormData") loginFormData: NgForm;
   @ViewChild("signUpFormData") signUpFormData: NgForm;
+  @ViewChild("userDetailsFormData") userDetailsFormData: NgForm;
+
   @ViewChild("closeLoginModal") closeLoginModal: ElementRef;
   // prettier-ignore
   @ViewChild("loginModalToggle") loginModalToggle: ElementRef;
   // prettier-ignore
-  @ViewChild("closeSignUpModal")closeSignUpModal: ElementRef;
+  @ViewChild("closeSignUpModal") closeSignUpModal: ElementRef;
+  // prettier-ignore
+  @ViewChild("closeUserDetailsModal") closeUserDetailsModal: ElementRef;
 
   public firstName: string;
   public lastName: string;
@@ -105,11 +109,78 @@ export class NavbarComponent implements OnInit {
       );
     }, 1000);
   }
+
+  onUserDetailsSubmit() {
+    this.isLoading = true;
+
+    const userDetails: IUser = {
+      id: this.user.user.id,
+      firstName: this.userDetailsFormData.value.firstName,
+      lastName: this.userDetailsFormData.value.lastName,
+      password: this.userDetailsFormData.value.password,
+      email: this.userDetailsFormData.value.email,
+      userDetails: {
+        id: this.user.user.id,
+        description: this.userDetailsFormData.value.userHeadline,
+        socialMedia: this.userDetailsFormData.value.userSocial,
+      },
+    };
+    console.log(userDetails);
+
+    setTimeout(() => {
+      this.authenticationService.postUserDetailsBasic(userDetails).subscribe(
+        (res: IUser) => {
+          this.isLoading = false;
+          this.store.dispatch(new Action.AddUser(res));
+          this.closeUserDetailsModal.nativeElement.click();
+        },
+        (err) => {
+          this.isLoading = false;
+          console.log(err);
+        }
+      );
+    }, 1000);
+  }
+
   disableError() {
     this.error = null;
   }
   onLogout() {
     console.log("logout");
     this.store.dispatch(new Action.Logout());
+  }
+  getBasicDetails(req: string) {
+    if (this.user.user) {
+      switch (req) {
+        case "fname":
+          return this.user.user.firstName;
+          break;
+        case "lname":
+          return this.user.user.lastName;
+          break;
+        case "email":
+          return this.user.user.email;
+          break;
+        case "password":
+          return this.user.user.password;
+          break;
+        case "headline":
+          if (
+            this.user.user.userDetails &&
+            this.user.user.userDetails.description
+          ) {
+            return this.user.user.userDetails.description;
+          }
+          break;
+        case "social":
+          if (
+            this.user.user.userDetails &&
+            this.user.user.userDetails.socialMedia
+          ) {
+            return this.user.user.userDetails.socialMedia;
+          }
+          break;
+      }
+    }
   }
 }
