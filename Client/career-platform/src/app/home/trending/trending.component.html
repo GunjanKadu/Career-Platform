@@ -1,5 +1,5 @@
 <div id="trending-course">
-  <div class="scroll-to row">
+  <div class="scroll-to row" *ngIf="showTrendingCourseButton">
     <button class="btn btn-danger" (click)="scrollTo(target)">
       View Trending Courses ▼
     </button>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { TrendingCourseService } from "./trending.service";
 import { ItrendingCourse } from "src/app/models/models";
 
@@ -8,6 +8,8 @@ import { ItrendingCourse } from "src/app/models/models";
   styleUrls: ["./trending.component.css"],
 })
 export class TrendingComponent implements OnInit {
+  @Input("showTrendingCourseButton") showTrendingCourseButton: boolean;
+
   public trendingCourses: ItrendingCourse[] = null;
   constructor(private trendingCourseService: TrendingCourseService) {}
 

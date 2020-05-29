@@ -1,0 +1,26 @@
+#ongoingCourses {
+  margin: 4rem;
+}
+
+#ongoingCourses .card {
+  flex-direction: row;
+  width: 46rem;
+  margin-left: 1rem;
+}
+#ongoingCourses .ongoing {
+  width: 94vw;
+  display: flex;
+  margin-top: 3rem;
+  margin-bottom: 19rem;
+  flex: 1;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  justify-content: space-around;
+}
+#ongoingCourses .trending {
+  margin-top: 3rem;
+  background-color: #003640;
+  height: 7rem;
+  width: 100%;
+  width: 93vw;
+}

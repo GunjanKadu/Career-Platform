@@ -14,6 +14,7 @@ import { AppRoutingModule } from "./app.routing.module";
 import { HomeComponent } from "./home/home.component";
 import { rootReducer } from "./redux";
 import { TrendingComponent } from "./home/trending/trending.component";
+import { CurrentComponent } from './home/current/current.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { TrendingComponent } from "./home/trending/trending.component";
     SpinnerComponent,
     HomeComponent,
     TrendingComponent,
+    CurrentComponent,
   ],
   imports: [
     FormsModule,
