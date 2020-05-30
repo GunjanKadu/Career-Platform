@@ -1,7 +1,6 @@
 package com.gk.userCourse.CareerPlatform.Entity;
 
 import javax.persistence.*;
-import javax.persistence.Column;
 
 @Entity
 @Table(name = "course_lecture")
@@ -14,16 +13,10 @@ public class CourseLecture {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "desc")
+    @Column(name = "description")
     private String desc;
 
-    @ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-            CascadeType.REFRESH })
-    @JoinColumn(name = "lecture_id")
-    private Courses courses;
-
     public CourseLecture() {
-
     }
 
     public int getId() {

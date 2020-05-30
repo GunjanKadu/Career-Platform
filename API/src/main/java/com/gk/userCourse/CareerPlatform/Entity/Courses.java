@@ -1,7 +1,10 @@
 package com.gk.userCourse.CareerPlatform.Entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,28 +16,33 @@ public class Courses {
     @Column(name = "id_courses")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "course_name")
     private String name;
 
-    @Column(name = "desc")
+    @Column(name = "description")
     private String desc;
 
     @Column(name = "lectures_Total")
-    private String totalLectures;
+    private int totalLectures;
 
     @Column(name = "date_Added")
+    @CreationTimestamp
     private Date dateAdded;
 
     @Column(name = "category")
     private String category;
 
 
-    @OneToMany(mappedBy = "courses", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-            CascadeType.REFRESH},fetch = FetchType.EAGER)
-    private List<CourseLecture> courseLecture;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "course_id")
+    private List<CourseLecture> courseLecture = new ArrayList<CourseLecture>();
 
     public Courses() {
 
+    }
+
+    public void add(CourseLecture courseLecture) {
+        this.courseLecture.add(courseLecture);
     }
 
     public List<CourseLecture> getCourseLecture() {
@@ -69,11 +77,11 @@ public class Courses {
         this.desc = desc;
     }
 
-    public String getTotalLectures() {
+    public int getTotalLectures() {
         return totalLectures;
     }
 
-    public void setTotalLectures(String totalLectures) {
+    public void setTotalLectures(int totalLectures) {
         this.totalLectures = totalLectures;
     }
 
