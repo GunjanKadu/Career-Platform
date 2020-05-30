@@ -17,4 +17,8 @@ public interface CoursesService {
     Optional<Courses> findById(int theId);
 
     void deleteCourse(int courseId);
+
+    void deleteLectures(int lectureId);
+
+    Optional<CourseLecture> findLectureById(int theId);
 }

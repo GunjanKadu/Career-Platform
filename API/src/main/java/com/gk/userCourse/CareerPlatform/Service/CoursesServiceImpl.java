@@ -39,12 +39,28 @@ public class CoursesServiceImpl implements CoursesService{
     }
 
     @Override
+    @Transactional
+
     public Optional<Courses> findById(int theId) {
         return coursesDAO.findById(theId);
     }
 
     @Override
+    @Transactional
+
     public void deleteCourse(int courseId) {
         coursesDAO.deleteById(courseId);
+    }
+
+    @Override
+    @Transactional
+    public void deleteLectures(int lectureId) {
+        courseLectureDao.deleteById(lectureId);
+    }
+
+    @Override
+    @Transactional
+    public Optional<CourseLecture> findLectureById(int theId) {
+        return courseLectureDao.findById(theId);
     }
 }

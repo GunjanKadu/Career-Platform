@@ -17,7 +17,7 @@ public class Courses {
     @Autowired
     private CoursesService coursesService;
 
-    @RolesAllowed({"ROLE_ADMIN","ROLE_INSTRUCTOR"})
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_INSTRUCTOR"})
     @PostMapping("/courses/lectures/{courseId}")
     public CourseLecture saveCourseLecture(@PathVariable int courseId, @RequestBody CourseLecture courseLecture) throws Exception {
         List<com.gk.userCourse.CareerPlatform.Entity.Courses> tempListCourse = coursesService.findAll().stream().filter(course -> course.getId() == courseId).collect(Collectors.toList());
@@ -30,13 +30,13 @@ public class Courses {
         throw new Exception("Course Not Found");
     }
 
-    @RolesAllowed({"ROLE_ADMIN","ROLE_INSTRUCTOR","ROLE_USER"})
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_INSTRUCTOR", "ROLE_USER"})
     @GetMapping("/courses")
     public List<com.gk.userCourse.CareerPlatform.Entity.Courses> getCourses() {
         return coursesService.findAll();
     }
 
-    @RolesAllowed({"ROLE_ADMIN","ROLE_INSTRUCTOR"})
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_INSTRUCTOR"})
     @PostMapping("/courses")
     public com.gk.userCourse.CareerPlatform.Entity.Courses saveCourse(@RequestBody com.gk.userCourse.CareerPlatform.Entity.Courses course) {
         course.setId(0);
@@ -44,7 +44,7 @@ public class Courses {
         return course;
     }
 
-    @RolesAllowed({"ROLE_ADMIN","ROLE_INSTRUCTOR","ROLE_USER"})
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_INSTRUCTOR", "ROLE_USER"})
     @GetMapping("/courses/{courseId}")
     public Optional<com.gk.userCourse.CareerPlatform.Entity.Courses> getSingleCourse(@PathVariable int courseId) throws Exception {
         Optional<com.gk.userCourse.CareerPlatform.Entity.Courses> foundCourse = coursesService.findById(courseId);
@@ -55,7 +55,7 @@ public class Courses {
         throw new Exception("Course Not Found");
     }
 
-    @RolesAllowed({"ROLE_ADMIN","ROLE_INSTRUCTOR"})
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_INSTRUCTOR"})
     @DeleteMapping("/courses/{courseId}")
     public String deleteCourse(@PathVariable int courseId) throws Exception {
         Optional<com.gk.userCourse.CareerPlatform.Entity.Courses> foundCourse = coursesService.findById(courseId);
@@ -66,5 +66,19 @@ public class Courses {
         throw new Exception("Course Not Found");
     }
 
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_INSTRUCTOR"})
+    @DeleteMapping("/courses/{courseId}/lectures/{lectureId}")
+    public String deleteLecture(@PathVariable int courseId, @PathVariable int lectureId) throws Exception {
+        Optional<com.gk.userCourse.CareerPlatform.Entity.Courses> foundCourse = coursesService.findById(courseId);
+        if (foundCourse.isPresent()) {
+            Optional<CourseLecture> foundLecture = coursesService.findLectureById(lectureId);
+            if (foundLecture.isPresent()) {
+                coursesService.deleteLectures(lectureId);
+                return "Deleted the Lecture " + foundLecture.get().getTitle() + "from " + foundCourse.get().getName();
+            }
+            throw new Exception("Lecture Not Found in " + foundCourse.get().getName());
+        }
+        throw new Exception("Course Not Found");
+    }
 
 }
