@@ -36,7 +36,7 @@ public class Courses {
         throw new Exception("Course Not Found");
     }
 
-    @RolesAllowed({"ROLE_ADMIN", "ROLE_INSTRUCTOR", "ROLE_USER"})
+
     @GetMapping("/courses")
     public List<com.gk.userCourse.CareerPlatform.Entity.Courses> getCourses() {
         return coursesService.findAll();

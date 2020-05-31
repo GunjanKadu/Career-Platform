@@ -35,6 +35,21 @@ public class Courses {
     @Column(name = "category")
     private String category;
 
+    @Column(name = "price")
+    private String price;
+
+    @Column(name = "total_hours")
+    private String totalHours;
+
+    @Column(name = "rating")
+    private String rating;
+
+    @Column(name = "level")
+    private String level;
+
+    @Column(name = "image")
+    private String image;
+
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
@@ -54,6 +69,46 @@ public class Courses {
     }
 
     //Getters and setters
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getTotalHours() {
+        return totalHours;
+    }
+
+    public void setTotalHours(String totalHours) {
+        this.totalHours = totalHours;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
     public List<CourseLecture> getCourseLecture() {
         return courseLecture;
     }
