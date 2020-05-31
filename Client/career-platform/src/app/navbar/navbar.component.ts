@@ -13,17 +13,18 @@ import { IUser, IState } from "../redux/types/authenticationTypes";
   styleUrls: ["./navbar.component.css"],
 })
 export class NavbarComponent implements OnInit {
-  @ViewChild("loginFormData") loginFormData: NgForm;
-  @ViewChild("signUpFormData") signUpFormData: NgForm;
-  @ViewChild("userDetailsFormData") userDetailsFormData: NgForm;
+  @ViewChild("loginFormData", { static: false }) loginFormData: NgForm;
+  @ViewChild("signUpFormData", { static: false }) signUpFormData: NgForm;
+  @ViewChild("userDetailsFormData", { static: false })
+  userDetailsFormData: NgForm;
 
-  @ViewChild("closeLoginModal") closeLoginModal: ElementRef;
+  @ViewChild("closeLoginModal", { static: false }) closeLoginModal: ElementRef;
   // prettier-ignore
-  @ViewChild("loginModalToggle") loginModalToggle: ElementRef;
+  @ViewChild("loginModalToggle",{static:false}) loginModalToggle: ElementRef;
   // prettier-ignore
-  @ViewChild("closeSignUpModal") closeSignUpModal: ElementRef;
+  @ViewChild("closeSignUpModal",{static:false}) closeSignUpModal: ElementRef;
   // prettier-ignore
-  @ViewChild("closeUserDetailsModal") closeUserDetailsModal: ElementRef;
+  @ViewChild("closeUserDetailsModal",{static:false}) closeUserDetailsModal: ElementRef;
 
   public firstName: string;
   public lastName: string;
