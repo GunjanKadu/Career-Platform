@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CoursesServiceImpl implements CoursesService{
 
     @Autowired
@@ -40,14 +41,12 @@ public class CoursesServiceImpl implements CoursesService{
 
     @Override
     @Transactional
-
     public Optional<Courses> findById(int theId) {
         return coursesDAO.findById(theId);
     }
 
     @Override
     @Transactional
-
     public void deleteCourse(int courseId) {
         coursesDAO.deleteById(courseId);
     }

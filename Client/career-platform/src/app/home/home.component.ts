@@ -9,7 +9,7 @@ import { IState } from "../redux/types/authenticationTypes";
   styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit {
-  constructor(private store: Store<RootState>) { }
+  constructor(private store: Store<RootState>) {}
 
   public user: IState;
 
@@ -19,4 +19,3 @@ export class HomeComponent implements OnInit {
       .subscribe((state: IState) => (this.user = state));
   }
 }
-

@@ -41,7 +41,7 @@
   width: 313px;
   height: 208px;
   margin-bottom: 2rem;
-  animation: sweep 2s infinite;
+  animation: sweep 1s infinite;
   transform-origin: 0 50%;
 }
 .skeletonCardBody {
@@ -53,7 +53,7 @@
   width: 313px;
   padding: 0;
   height: 16px;
-  animation: sweep 2s infinite;
+  animation: sweep 1s infinite;
   transform-origin: 0 50%;
 }
 .skeletonCardText {
@@ -61,7 +61,7 @@
   width: 313px;
   padding: 0;
   height: 16px;
-  animation: sweep 2s infinite;
+  animation: sweep 1s infinite;
   transform-origin: 0 50%;
 }
 @keyframes sweep {

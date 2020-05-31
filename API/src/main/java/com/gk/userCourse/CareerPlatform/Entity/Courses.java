@@ -1,6 +1,8 @@
 package com.gk.userCourse.CareerPlatform.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -9,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "courses")
+@Proxy(lazy = false)
 public class Courses {
 
     @Id
@@ -37,14 +40,20 @@ public class Courses {
     @JoinColumn(name = "course_id")
     private List<CourseLecture> courseLecture = new ArrayList<CourseLecture>();
 
+    @ManyToMany(mappedBy = "courses", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JsonIgnore
+    private List<User> users;
+
     public Courses() {
 
     }
 
+    //Convenience Method
     public void add(CourseLecture courseLecture) {
         this.courseLecture.add(courseLecture);
     }
 
+    //Getters and setters
     public List<CourseLecture> getCourseLecture() {
         return courseLecture;
     }
@@ -99,5 +108,13 @@ public class Courses {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

@@ -31,10 +31,11 @@ public class UserRest {
 
     @GetMapping("/users/{userId}")
     public User getSingleUser(@PathVariable int userId) {
-        if (userId < 0 || userId > userService.findAll().size()) {
+        User foundUser = userService.findbyId(userId);
+        if (userId < 0 || foundUser==null) {
             throw new UserNotFoundExecption("User Id Not Found - " + userId);
         }
-        return userService.findbyId(userId);
+        return foundUser;
     }
 
     @GetMapping("/users/getByUserName")
