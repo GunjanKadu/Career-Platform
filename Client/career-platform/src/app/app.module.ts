@@ -14,7 +14,8 @@ import { AppRoutingModule } from "./app.routing.module";
 import { HomeComponent } from "./home/home.component";
 import { rootReducer } from "./redux";
 import { TrendingComponent } from "./home/trending/trending.component";
-import { CurrentComponent } from './home/current/current.component';
+import { CurrentComponent } from "./home/current/current.component";
+import { CoursesComponent } from "./courses/courses.component";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CurrentComponent } from './home/current/current.component';
     HomeComponent,
     TrendingComponent,
     CurrentComponent,
+    CoursesComponent,
   ],
   imports: [
     FormsModule,

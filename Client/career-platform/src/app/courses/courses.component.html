@@ -1,0 +1,13 @@
+<div *ngFor="let course of courses">
+  <div class="card courses">
+    <img
+      class="card-img-top"
+      style="height: 10rem; width: 20rem;"
+      src="{{ course.image }}"
+      alt="Card image cap"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ course.name }}</h5>
+    </div>
+  </div>
+</div>

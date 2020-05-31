@@ -1,0 +1,6 @@
+.courses {
+  flex-direction: row;
+  width: 30%;
+  border: none;
+  border-bottom: 2px solid lightgrey;
+}
