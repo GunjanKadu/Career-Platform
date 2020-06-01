@@ -50,6 +50,11 @@ public class Courses {
     @Column(name = "image")
     private String image;
 
+    @Column(name = "short_description")
+    private String shortDesc;
+
+    @Column(name = "course_author")
+    private String courseAuthor;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
@@ -93,6 +98,14 @@ public class Courses {
         this.totalHours = totalHours;
     }
 
+    public String getCourseAuthor() {
+        return courseAuthor;
+    }
+
+    public void setCourseAuthor(String courseAuthor) {
+        this.courseAuthor = courseAuthor;
+    }
+
     public String getRating() {
         return rating;
     }
@@ -107,6 +120,14 @@ public class Courses {
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    public String getShortDesc() {
+        return shortDesc;
+    }
+
+    public void setShortDesc(String shortDesc) {
+        this.shortDesc = shortDesc;
     }
 
     public List<CourseLecture> getCourseLecture() {

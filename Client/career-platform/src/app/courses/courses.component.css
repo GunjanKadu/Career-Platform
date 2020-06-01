@@ -1,6 +1,46 @@
 .courses {
   flex-direction: row;
   width: 30%;
-  border: none;
-  border-bottom: 2px solid lightgrey;
+  margin-top: 1rem;
+  margin-left: 2rem;
+  height: 12rem;
+  cursor: pointer;
+}
+.result {
+  margin: 3rem;
+}
+.name_price {
+  display: flex;
+  justify-content: space-between;
+}
+.course_name {
+  font-size: 15px;
+}
+.course_desc {
+  font-size: 10px;
+  margin: 0.1rem;
+}
+.course_author {
+  font-size: 9.4px;
+  color: darkgray;
+  margin: 0.1rem;
+}
+.course_rating {
+  font-size: 11px;
+  margin-right: 0.5rem;
+  color: #f5c251;
+  font-weight: bold;
+}
+.rating {
+  display: flex;
+  margin-bottom: -10px;
+}
+star-rating {
+  margin-top: -5px;
+  margin-bottom: 0;
+}
+.general {
+  font-size: 9.4px;
+  color: darkgray;
+  margin: 0.1rem;
 }

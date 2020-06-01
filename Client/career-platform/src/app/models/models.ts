@@ -20,6 +20,9 @@ export interface ICourses {
   rating: String;
   totalHours: String;
   totalLectures: number;
+  image: string;
+  shortDesc: string;
+  courseAuthor: string;
 }
 
 export interface ILecture {

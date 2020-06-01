@@ -1,13 +1,33 @@
+<h1 class="result">Search Result for React : 25 Found</h1>
 <div *ngFor="let course of courses">
   <div class="card courses">
     <img
       class="card-img-top"
-      style="height: 10rem; width: 20rem;"
+      style="height: 100%; width: 20rem;"
       src="{{ course.image }}"
       alt="Card image cap"
     />
-    <div class="card-body">
-      <h5 class="card-title">{{ course.name }}</h5>
+    <div class="card-body" style="padding-top: 5px;">
+      <div class="name_price">
+        <h5 class="card-title course_name">{{ course.name }}</h5>
+        <h5 class="card-title course_price">€{{ course.price }}</h5>
+      </div>
+      <p class="course_desc">{{ course.shortDesc }}</p>
+      <p class="course_author">By - {{ course.courseAuthor }}</p>
+      <div class="rating">
+        <p class="course_rating">{{ course.rating }}.0</p>
+        <star-rating
+          value="{{ course.rating }}"
+          checkedcolor="#f5c251"
+          uncheckedcolor="#dedfe0"
+          size="12px"
+          readonly="false"
+        ></star-rating>
+      </div>
+      <p class="general">
+        {{ course.totalHours }} total Hours •
+        {{ course.totalLectures }} lectures • {{ course.level }}
+      </p>
     </div>
   </div>
 </div>
