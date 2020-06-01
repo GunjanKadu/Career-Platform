@@ -16,6 +16,7 @@ import { rootReducer } from "./redux";
 import { TrendingComponent } from "./home/trending/trending.component";
 import { CurrentComponent } from "./home/current/current.component";
 import { CoursesComponent } from "./courses/courses.component";
+import { CoursedescComponent } from "./courses/coursedesc/coursedesc.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CoursesComponent } from "./courses/courses.component";
     TrendingComponent,
     CurrentComponent,
     CoursesComponent,
+    CoursedescComponent,
   ],
   imports: [
     FormsModule,

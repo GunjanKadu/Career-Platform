@@ -1,33 +1,152 @@
 <h1 class="result">Search Result for React : 25 Found</h1>
-<div *ngFor="let course of courses">
-  <div class="card courses">
-    <img
-      class="card-img-top"
-      style="height: 100%; width: 20rem;"
-      src="{{ course.image }}"
-      alt="Card image cap"
-    />
-    <div class="card-body" style="padding-top: 5px;">
-      <div class="name_price">
-        <h5 class="card-title course_name">{{ course.name }}</h5>
-        <h5 class="card-title course_price">€{{ course.price }}</h5>
+<div class="row">
+  <div class="filters col-md-2">
+    <hr />
+    <div class="levels">
+      <h2>Level</h2>
+      <div class="group">
+        <input type="checkbox" id="alllevels" />
+        <label for="alllevels">All Levels</label>
       </div>
-      <p class="course_desc">{{ course.shortDesc }}</p>
-      <p class="course_author">By - {{ course.courseAuthor }}</p>
-      <div class="rating">
-        <p class="course_rating">{{ course.rating }}.0</p>
-        <star-rating
-          value="{{ course.rating }}"
-          checkedcolor="#f5c251"
-          uncheckedcolor="#dedfe0"
-          size="12px"
-          readonly="false"
-        ></star-rating>
+      <div class="group">
+        <input type="checkbox" id="beginner" />
+        <label for="beginner">Beginner</label>
       </div>
-      <p class="general">
-        {{ course.totalHours }} total Hours •
-        {{ course.totalLectures }} lectures • {{ course.level }}
-      </p>
+      <div class="group">
+        <input type="checkbox" id="intermediate" />
+        <label for="intermediate">Intermediate</label>
+      </div>
+      <div class="group">
+        <input type="checkbox" id="expert" />
+        <label for="expert">Expert</label>
+      </div>
+    </div>
+    <hr />
+    <div class="price">
+      <h2>Price</h2>
+      <div class="group">
+        <input type="checkbox" id="Paid" />
+        <label for="Paid">Paid</label>
+      </div>
+      <div class="group">
+        <input type="checkbox" id="free" />
+        <label for="free">Free</label>
+      </div>
+    </div>
+    <hr />
+    <div class="duration">
+      <h2>Duration</h2>
+      <div class="group">
+        <input type="checkbox" id="10-20" />
+        <label for="10-20">10-20 Hours</label>
+      </div>
+      <div class="group">
+        <input type="checkbox" id="20-30" />
+        <label for="20-30">20-30 Hours</label>
+      </div>
+      <div class="group">
+        <input type="checkbox" id="30-40" />
+        <label for="30-40">30-40 Hours</label>
+      </div>
+    </div>
+    <hr />
+    <div class="lectures">
+      <h2>Lectures</h2>
+      <div class="group">
+        <input type="checkbox" id="10+" />
+        <label for="10+">10 +</label>
+      </div>
+      <div class="group">
+        <input type="checkbox" id="20+" />
+        <label for="20+">20 + </label>
+      </div>
+      <div class="group">
+        <input type="checkbox" id="30+" />
+        <label for="30+">30 + </label>
+      </div>
+    </div>
+    <hr />
+    <div class="ratings">
+      <h2>Ratings</h2>
+      <div class="group">
+        <input type="radio" name="fourplus" />
+        <label for="fourplus">
+          <star-rating
+            value="4"
+            checkedcolor="#f5c251"
+            uncheckedcolor="#dedfe0"
+            size="15px"
+            readonly="true"
+          ></star-rating
+        ></label>
+      </div>
+      <div class="group">
+        <input type="radio" name="threeplus" />
+        <label for="threeplus">
+          <star-rating
+            value="3"
+            checkedcolor="#f5c251"
+            uncheckedcolor="#dedfe0"
+            size="15px"
+            readonly="true"
+          ></star-rating
+        ></label>
+      </div>
+      <div class="group">
+        <input type="radio" name="twoplus" />
+        <label for="twoplus">
+          <star-rating
+            value="2"
+            checkedcolor="#f5c251"
+            uncheckedcolor="#dedfe0"
+            size="15px"
+            readonly="true"
+          ></star-rating
+        ></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="courses_list col-md-8">
+    <div *ngFor="let course of courses; trackBy: identity; let i = index">
+      <div class="card courses">
+        <img
+          class="card-img-top"
+          style="height: 100%; width: 25rem;"
+          src="{{ course.image }}"
+          alt="Card image cap"
+        />
+        <div class="card-body" style="padding-top: 5px;">
+          <div class="name_price">
+            <h5 class="card-title course_name">{{ course.name }}</h5>
+            <h5 class="card-title course_price">€{{ course.price }}</h5>
+          </div>
+          <p class="course_desc">{{ course.shortDesc }}</p>
+          <p class="course_author">By - {{ course.courseAuthor }}</p>
+          <div class="rating">
+            <p class="course_rating">{{ course.rating }}.0</p>
+            <star-rating
+              value="{{ course.rating }}"
+              checkedcolor="#f5c251"
+              uncheckedcolor="#dedfe0"
+              size="15px"
+              readonly="true"
+            ></star-rating>
+          </div>
+          <p class="general">
+            {{ course.totalHours }} total Hours •
+            {{ course.totalLectures }} lectures •
+            {{ course.level }}
+          </p>
+        </div>
+      </div>
+      <div class="highlight" *ngIf="i == 1">
+        <div class="holder">
+          <h2>Find the right React course for you</h2>
+          <p>Answer a few question fora custom recommendation</p>
+        </div>
+        <button class="btn">Get Started</button>
+      </div>
     </div>
   </div>
 </div>

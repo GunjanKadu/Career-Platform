@@ -12,13 +12,14 @@ export class CoursesComponent implements OnInit {
 
   public courses: Array<ICourses>;
 
-  public lecture:any;
-
-
+  public lecture: any;
 
   ngOnInit() {
     this.courseService
       .fetchAllCourses()
       .subscribe((courses: Array<ICourses>) => (this.courses = courses));
+  }
+  identity(index: number, course: ICourses) {
+    return course.id;
   }
 }
