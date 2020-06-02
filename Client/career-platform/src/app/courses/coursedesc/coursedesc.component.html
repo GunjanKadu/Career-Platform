@@ -1,1 +1,57 @@
-<p>coursedesc works!</p>
+<div id="coursedesc_container" *ngIf="!loading; else spinner">
+  <header id="heading">
+    <div class="content">
+      <h1 class="course_name">{{ course.name }}</h1>
+      <p class="course_shortdesc">
+        {{ course.shortDesc }}
+      </p>
+      <div class="rating" style="display: flex;">
+        <star-rating
+          value="{{ course.rating }}"
+          checkedcolor="#f5c251"
+          uncheckedcolor="#dedfe0"
+          size="15px"
+          readonly="true"
+        ></star-rating>
+        <p style="margin-left: 10px;">{{ course.rating }}.0</p>
+      </div>
+      <p class="generalinfo">
+        Created by {{ course.courseAuthor }}, &nbsp; &nbsp; Last Updated
+        {{ course.dateAdded | date }}
+      </p>
+    </div>
+    <div class="price_container">
+      <div class="wishlist">
+        <img
+          src="../../../assets/img/icons8-heart_outline.png"
+          alt="Fav"
+          style="cursor: pointer; margin: 3% 0.5% 3% 49%;"
+        />
+        <p style="display: inline;">WishList</p>
+      </div>
+      <div class="price_content">
+        <div class="image">
+          <img src="{{ course.image }}" alt="{{ course.name }}" />
+        </div>
+        <div class="price">
+          <h1 style="color: black; margin: 25px 0px 0px 25px;">
+            €{{ course.price }}
+          </h1>
+        </div>
+        <div class="cart">
+          <button class="btn btn-danger">Add to cart</button>
+          <button class="btn btn-light">Buy now</button>
+        </div>
+        <div class="info">
+          <p>This course includes</p>
+          <p>{{ course.totalHours }} hours on-demand video</p>
+          <p>{{ course.totalLectures }} lectures</p>
+          <p>Full Life time Access</p>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+<ng-template #spinner>
+  <div class="loader">Loading...</div>
+</ng-template>
