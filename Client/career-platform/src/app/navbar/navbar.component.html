@@ -11,23 +11,46 @@
   >
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" [routerLink]="['/']">
     <img class="logo" src="../../assets/img/navLogo.png" alt="Brand" />
   </a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-    <form class="form-inline my-2 my-lg-0" style="margin-left: 3vw;">
+    <form
+      class="form-inline my-2 my-lg-0"
+      style="margin-left: 3vw;"
+      #searchForm="ngForm"
+      (ngSubmit)="onSubmitSearch()"
+    >
       <input
         class="form-control mr-sm-2"
         type="search"
         placeholder="Search for anything"
         aria-label="Search"
         style="width: 26vw; height: 3.5rem;"
+        ngModel
+        required
+        minlength="3"
+        name="courseName"
       />
-      <button class="btn btn-outline-danger my-2 mx-2 my-sm-0" type="submit">
+
+      <button
+        class="btn btn-outline-danger my-2 my-sm-0"
+        type="submit"
+        [disabled]="!searchForm.valid"
+      >
         Search
       </button>
+      |
+      <button
+        class="btn btn-outline-danger my-2 mx-2 my-sm-0"
+        type="button"
+        [routerLink]="['/courses']"
+      >
+        View All Courses
+      </button>
     </form>
+
     <ul *ngIf="!user.authenticated" class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item">
         <button

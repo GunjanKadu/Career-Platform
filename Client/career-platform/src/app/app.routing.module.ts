@@ -7,6 +7,7 @@ import { CoursedescComponent } from "./courses/coursedesc/coursedesc.component";
 const appRoutes: Routes = [
   { path: "", component: HomeComponent },
   { path: "courses", component: CoursesComponent },
+  { path: "courses/:courseName", component: CoursesComponent },
   { path: "course/:courseName/:id", component: CoursedescComponent },
 ];
 

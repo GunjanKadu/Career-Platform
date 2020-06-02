@@ -6,6 +6,8 @@ import { Store } from "@ngrx/store";
 import * as Action from "../redux/actions/action";
 import { RootState } from "../redux";
 import { IUser, IState } from "../redux/types/authenticationTypes";
+import { Router } from "@angular/router";
+import { tap } from "rxjs/operators";
 
 @Component({
   selector: "app-navbar",
@@ -15,8 +17,9 @@ import { IUser, IState } from "../redux/types/authenticationTypes";
 export class NavbarComponent implements OnInit {
   @ViewChild("loginFormData", { static: false }) loginFormData: NgForm;
   @ViewChild("signUpFormData", { static: false }) signUpFormData: NgForm;
-  @ViewChild("userDetailsFormData", { static: false })
-  userDetailsFormData: NgForm;
+  @ViewChild("searchForm", { static: false }) searchForm: NgForm;
+  // prettier-ignore
+  @ViewChild("userDetailsFormData", { static: false }) userDetailsFormData: NgForm;
 
   @ViewChild("closeLoginModal", { static: false }) closeLoginModal: ElementRef;
   // prettier-ignore
@@ -24,7 +27,7 @@ export class NavbarComponent implements OnInit {
   // prettier-ignore
   @ViewChild("closeSignUpModal",{static:false}) closeSignUpModal: ElementRef;
   // prettier-ignore
-  @ViewChild("closeUserDetailsModal",{static:false}) closeUserDetailsModal: ElementRef;
+  @ViewChild("closeUserDetailsModal", { static: false }) closeUserDetailsModal: ElementRef;
 
   public firstName: string;
   public lastName: string;
@@ -37,7 +40,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private store: Store<RootState>
+    private store: Store<RootState>,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -46,6 +50,11 @@ export class NavbarComponent implements OnInit {
       .subscribe((state: IState) => (this.user = state));
   }
 
+  onSubmitSearch() {
+    let course = this.searchForm.value.courseName;
+    this.router.navigate(["/courses/", course]);
+    this.searchForm.resetForm();
+  }
   onSubmitLogin() {
     this.userName = this.loginFormData.value.username;
     this.password = this.loginFormData.value.password;
@@ -65,10 +74,10 @@ export class NavbarComponent implements OnInit {
 
         this.authenticationService
           .fetchSingleUser(this.userName)
-          .subscribe((user: IUser) =>
-            this.store.dispatch(new Action.AddUser(user))
-          );
-        console.log(response);
+          .pipe(
+            tap((user: IUser) => this.store.dispatch(new Action.AddUser(user)))
+          )
+          .subscribe((user: IUser) => user);
       },
       (error: any) => {
         this.isLoading = false;
@@ -92,22 +101,24 @@ export class NavbarComponent implements OnInit {
     };
 
     setTimeout(() => {
-      this.authenticationService.signupService(user).subscribe(
-        (res: IUser) => {
-          this.signUpFormData.resetForm();
-          this.closeSignUpModal.nativeElement.click();
-          this.loginModalToggle.nativeElement.click();
-          this.isLoading = false;
-          this.store.dispatch(new Action.AddUser(res));
-        },
-        (err) => {
-          this.isLoading = false;
-          // tslint:disable-next-line: max-line-length
-          err.error.message === "UserName Already Exists"
-            ? (this.error = "Email already exists please try to login.")
-            : (this.error = err.error.message);
-        }
-      );
+      this.authenticationService
+        .signupService(user)
+        .pipe(tap((res: IUser) => this.store.dispatch(new Action.AddUser(res))))
+        .subscribe(
+          (res: IUser) => {
+            this.signUpFormData.resetForm();
+            this.closeSignUpModal.nativeElement.click();
+            this.loginModalToggle.nativeElement.click();
+            this.isLoading = false;
+          },
+          (err) => {
+            this.isLoading = false;
+            // tslint:disable-next-line: max-line-length
+            err.error.message === "UserName Already Exists"
+              ? (this.error = "Email already exists please try to login.")
+              : (this.error = err.error.message);
+          }
+        );
     }, 1000);
   }
 
@@ -129,17 +140,19 @@ export class NavbarComponent implements OnInit {
     console.log(userDetails);
 
     setTimeout(() => {
-      this.authenticationService.postUserDetailsBasic(userDetails).subscribe(
-        (res: IUser) => {
-          this.isLoading = false;
-          this.store.dispatch(new Action.AddUser(res));
-          this.closeUserDetailsModal.nativeElement.click();
-        },
-        (err) => {
-          this.isLoading = false;
-          console.log(err);
-        }
-      );
+      this.authenticationService
+        .postUserDetailsBasic(userDetails)
+        .pipe(tap((res: IUser) => this.store.dispatch(new Action.AddUser(res))))
+        .subscribe(
+          (res: IUser) => {
+            this.isLoading = false;
+            this.closeUserDetailsModal.nativeElement.click();
+          },
+          (err) => {
+            this.isLoading = false;
+            console.log(err);
+          }
+        );
     }, 1000);
   }
 
