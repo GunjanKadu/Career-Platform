@@ -107,8 +107,11 @@
     </div>
   </div>
 
-  <div class="courses_list col-md-8">
-    <div *ngFor="let course of courses; trackBy: identity; let i = index">
+  <div class="courses_list col-md-6">
+    <a
+      *ngFor="let course of courses; trackBy: identity; let i = index"
+      [routerLink]="['/', 'course', course.name, course.id]"
+    >
       <div class="card courses">
         <img
           class="card-img-top"
@@ -147,6 +150,6 @@
         </div>
         <button class="btn">Get Started</button>
       </div>
-    </div>
+    </a>
   </div>
 </div>

@@ -23,6 +23,7 @@
 #quote .content {
   color: white;
   margin: 26rem 0px;
+  width: 55%;
 }
 #quote .content h1 {
   filter: brightness(200%);

@@ -1,11 +1,9 @@
 .courses {
   flex-direction: row;
-  width: 75%;
   margin: 1.5rem 0px;
   height: 15rem;
   cursor: pointer;
 }
-
 .result {
   margin: 3rem;
 }
@@ -15,6 +13,10 @@
 }
 .course_name {
   font-size: 20px;
+}
+.courses_list a {
+  color: black;
+  text-decoration: none;
 }
 .course_desc {
   font-size: 15px;
@@ -68,7 +70,6 @@ star-rating {
 }
 .highlight {
   display: flex;
-  width: 75%;
   height: 10rem;
   background: url(https://udemy-images.udemy.com/browse_components/shared-assets/purple-intersect.svg)
     repeat-x #003640;
