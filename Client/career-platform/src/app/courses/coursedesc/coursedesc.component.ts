@@ -2,6 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { CourseserviceService } from "../courseservice.service";
 import { ICourses } from "src/app/models/models";
+import { Store } from "@ngrx/store";
+import { RootState } from "src/app/redux";
+import { IState } from "src/app/redux/types/authenticationTypes";
 
 @Component({
   selector: "app-coursedesc",
@@ -13,22 +16,36 @@ export class CoursedescComponent implements OnInit {
   private courseName: string;
   public course: ICourses;
   public loading: boolean;
+  public user: IState;
 
   constructor(
     private route: ActivatedRoute,
-    private CourseService: CourseserviceService
+    private courseService: CourseserviceService,
+    private store: Store<RootState>
   ) {}
 
   ngOnInit() {
+    this.store
+      .select("authentication")
+      .subscribe((user: IState) => (this.user = user));
+
     this.courseId = this.route.snapshot.params["id"];
     this.courseName = this.route.snapshot.params["courseName"];
     this.loading = true;
 
     setTimeout(() => {
-      this.CourseService.fetchCourseById(this.courseId).subscribe(
-        (course: ICourses) => (this.course = course)
-      );
+      this.courseService
+        .fetchCourseById(this.courseId)
+        .subscribe((course: ICourses) => (this.course = course));
       this.loading = false;
     }, 1000);
+  }
+
+  registerCourse() {
+    if (this.user.authenticated) {
+      this.courseService
+        .enrollUserToACourse(this.user.user.id, this.courseId)
+        .subscribe((res) => console.log(res));
+    }
   }
 }

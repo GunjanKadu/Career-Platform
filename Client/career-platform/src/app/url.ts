@@ -12,3 +12,7 @@ export const TRENDINGCOURSES = "http://localhost:8080/api/featuredCourses";
 
 //All Courses
 export const COURSES = "http://localhost:8080/api/courses";
+
+//Add user to course
+export const ADDUSERTOCOURSE = (userId: number, courseId: number) =>
+  `http://localhost:8080/api/user/${userId}/courses/${courseId}`;

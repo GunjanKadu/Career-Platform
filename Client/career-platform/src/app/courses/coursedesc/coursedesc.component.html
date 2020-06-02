@@ -22,12 +22,7 @@
     </div>
     <div class="price_container">
       <div class="wishlist">
-        <img
-          src="../../../assets/img/icons8-heart_outline.png"
-          alt="Fav"
-          style="cursor: pointer; margin: 3% 0.5% 3% 49%;"
-        />
-        <p style="display: inline;">WishList</p>
+        <div style="cursor: pointer; margin: 6% 0.5% 3% 49%;"></div>
       </div>
       <div class="price_content">
         <div class="image">
@@ -39,8 +34,10 @@
           </h1>
         </div>
         <div class="cart">
-          <button class="btn btn-danger">Add to cart</button>
-          <button class="btn btn-light">Buy now</button>
+          <button class="btn btn-danger">WishList</button>
+          <button class="btn btn-light" (click)="registerCourse()">
+            Buy now
+          </button>
         </div>
         <div class="info">
           <p>This course includes</p>
