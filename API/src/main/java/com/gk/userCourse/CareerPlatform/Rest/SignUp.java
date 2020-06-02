@@ -33,8 +33,9 @@ public class SignUp {
             throw new Exception("UserName Already Exists");
         }
         theUser.setId(0);
-        String encodedPasword = passwordEncoder.encode(theUser.getPassword());
-        theUser.setPassword(encodedPasword);
+        theUser.setRole("ROLE_USER");
+        String encodedPassword = passwordEncoder.encode(theUser.getPassword());
+        theUser.setPassword(encodedPassword);
         userService.save(theUser);
         return theUser;
     }
