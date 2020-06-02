@@ -11,4 +11,8 @@ export class CourseserviceService {
   fetchAllCourses() {
     return this.http.get(COURSES);
   }
+
+  fetchCourseById(id: number) {
+    return this.http.get(`${COURSES}/${id}`);
+  }
 }
