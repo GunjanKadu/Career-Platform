@@ -95,10 +95,33 @@ public class Courses {
         List<com.gk.userCourse.CareerPlatform.Entity.Courses> foundCourse = courses.stream().filter(crs -> crs.getId() == courseId).collect(Collectors.toList());
         User foundUser = userService.findbyId(userId);
         if (foundCourse.size() == 1 && foundUser != null) {
-            com.gk.userCourse.CareerPlatform.Entity.Courses tempCourse = foundCourse.get(0);
-            foundUser.add(tempCourse);
+            List<com.gk.userCourse.CareerPlatform.Entity.Courses> coursesInUser = foundUser.getCourses();
+            if (coursesInUser.contains(foundCourse.get(0))) {
+                throw new Exception("Already Enrolled For The Course");
+            } else {
+                com.gk.userCourse.CareerPlatform.Entity.Courses tempCourse = foundCourse.get(0);
+                foundUser.add(tempCourse);
+                userService.save(foundUser);
+            }
+            List<com.gk.userCourse.CareerPlatform.Entity.Courses> foundCourses = foundUser.getCourses();
+            return foundCourses;
+        }
+        throw new Exception("The Specified Course or User Not Found");
+    }
+
+
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_INSTRUCTOR", "ROLE_USER"})
+    @DeleteMapping("/user/{userId}/courses/{courseId}")
+    @Transactional
+    public List<com.gk.userCourse.CareerPlatform.Entity.Courses> deleteCourse(@PathVariable int courseId, @PathVariable int userId) throws Exception {
+        User foundUser = userService.findbyId(userId);
+        Optional<com.gk.userCourse.CareerPlatform.Entity.Courses> courseToBeDeleted = coursesService.findById(courseId);
+        List<com.gk.userCourse.CareerPlatform.Entity.Courses> coursesInUser = foundUser.getCourses();
+
+        if (coursesInUser.size() > 0 && foundUser != null) {
+            foundUser.add(coursesInUser.stream().filter(course -> course.getId() != courseId).collect(Collectors.toList()));
             userService.save(foundUser);
-        List<com.gk.userCourse.CareerPlatform.Entity.Courses> foundCourses = foundUser.getCourses();
+            List<com.gk.userCourse.CareerPlatform.Entity.Courses> foundCourses = foundUser.getCourses();
             return foundCourses;
         }
         throw new Exception("The Specified Course or User Not Found");

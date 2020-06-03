@@ -31,11 +31,11 @@ public class User {
     @Column(name = "role")
     private String role;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "course_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
     private List<Courses> courses = new ArrayList<Courses>();
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_detail_id")
     private UserDetails userDetails;
 
@@ -50,10 +50,14 @@ public class User {
         this.password = password;
     }
 
-
     public void add(Courses courses) {
         this.courses.add(courses);
     }
+
+    public void add(List<Courses> courses) {
+        this.courses = courses;
+    }
+
 
     public String getPassword() {
         return password;

@@ -62,4 +62,14 @@ export class CoursedescComponent implements OnInit {
         });
     }
   }
+  deRegisterCourse() {
+    if (this.user.authenticated) {
+      this.courseService
+        .deEnrollUserFromACourse(this.user.user.id, this.courseId)
+        .subscribe((res: ICourses[]) => {
+          this.store.dispatch(new Action.AddCourseToUser(res));
+          console.log(res);
+        });
+    }
+  }
 }
