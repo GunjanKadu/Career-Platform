@@ -17,6 +17,8 @@ export class CoursedescComponent implements OnInit {
   public course: ICourses;
   public loading: boolean;
   public user: IState;
+  public isUserEnrolledForCourse: boolean;
+  public courseRating: String;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,7 +40,16 @@ export class CoursedescComponent implements OnInit {
         .fetchCourseById(this.courseId)
         .subscribe((course: ICourses) => (this.course = course));
       this.loading = false;
+      this.courseRating = this.course.rating;
     }, 1000);
+
+    if (this.user.user) {
+      this.user.user.courses.map((course) =>
+        course.id == this.courseId && course.name == this.courseName
+          ? (this.isUserEnrolledForCourse = true)
+          : false
+      );
+    }
   }
 
   registerCourse() {

@@ -4,7 +4,8 @@
 }
 #home::before {
   content: "";
-  background: url("../../assets/img/cover.jpg") no-repeat center center/cover;
+  /* background: url("../../assets/img/Cover/6.jpg") no-repeat center center/cover;
+  background: no-repeat center center/cover; */
   opacity: 0.95;
   position: absolute;
   top: 0;
@@ -12,6 +13,33 @@
   width: 100%;
   height: 80%;
   z-index: -1;
+}
+.back1 {
+  background: url("../../assets/img/Cover/1.jpg") no-repeat center center/cover;
+}
+.back2 {
+  background: url("../../assets/img/Cover/2.jpg") no-repeat center center/cover;
+}
+.back3 {
+  background: url("../../assets/img/Cover/3.jpg") no-repeat center center/cover;
+}
+.back4 {
+  background: url("../../assets/img/Cover/4.jpg") no-repeat center center/cover;
+}
+.back5 {
+  background: url("../../assets/img/Cover/5.jpg") no-repeat center center/cover;
+}
+.back6 {
+  background: url("../../assets/img/Cover/6.jpg") no-repeat center center/cover;
+}
+.back7 {
+  background: url("../../assets/img/Cover/7.jpg") no-repeat center center/cover;
+}
+.back8 {
+  background: url("../../assets/img/Cover/8.jpg") no-repeat center center/cover;
+}
+.back9 {
+  background: url("../../assets/img/Cover/9.jpg") no-repeat center center/cover;
 }
 #quote {
   width: 95%;

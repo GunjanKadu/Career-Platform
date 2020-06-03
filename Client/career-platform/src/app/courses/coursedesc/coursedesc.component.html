@@ -1,5 +1,5 @@
 <div id="coursedesc_container" *ngIf="!loading; else spinner">
-  <header id="heading">
+  <header id="heading" *ngIf="course">
     <div class="content">
       <h1 class="course_name">{{ course.name }}</h1>
       <p class="course_shortdesc">
@@ -33,7 +33,7 @@
             €{{ course.price }}
           </h1>
         </div>
-        <div class="cart">
+        <div class="cart" *ngIf="!isUserEnrolledForCourse">
           <button class="btn btn-danger">WishList</button>
           <button class="btn btn-light" (click)="registerCourse()">
             Buy now
