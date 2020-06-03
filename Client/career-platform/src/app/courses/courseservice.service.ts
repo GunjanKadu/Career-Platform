@@ -25,7 +25,7 @@ export class CourseserviceService {
     });
     console.log(URL.ADDUSERTOCOURSE(userId, courseId));
     console.log(token);
-    return this.http.post<ICourses>(
+    return this.http.post<ICourses[]>(
       URL.ADDUSERTOCOURSE(userId, courseId),
       {},
       {

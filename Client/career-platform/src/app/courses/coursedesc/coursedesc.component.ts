@@ -5,7 +5,7 @@ import { ICourses } from "src/app/models/models";
 import { Store } from "@ngrx/store";
 import { RootState } from "src/app/redux";
 import { IState } from "src/app/redux/types/authenticationTypes";
-
+import * as Action from "../../redux/actions/action";
 @Component({
   selector: "app-coursedesc",
   templateUrl: "./coursedesc.component.html",
@@ -45,7 +45,10 @@ export class CoursedescComponent implements OnInit {
     if (this.user.authenticated) {
       this.courseService
         .enrollUserToACourse(this.user.user.id, this.courseId)
-        .subscribe((res) => console.log(res));
+        .subscribe((res: ICourses[]) => {
+          this.store.dispatch(new Action.AddCourseToUser(res));
+          console.log(res);
+        });
     }
   }
 }
