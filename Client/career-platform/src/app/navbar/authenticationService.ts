@@ -3,10 +3,13 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import * as URL from "../url";
 import { IUser } from "../redux/types/authenticationTypes";
+import { Store } from "@ngrx/store";
+import { RootState } from "../redux";
+import * as Action from "../redux/actions/action";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store<RootState>) {}
 
   loginService(user: User) {
     const headers = new HttpHeaders({
@@ -29,6 +32,18 @@ export class AuthenticationService {
       Authorization: `Bearer ${token}`,
     });
     return this.http.get<IUser>(URL.FETCHUSER + userName, { headers });
+  }
+  fetchSingleUserandUpdateState(id: number) {
+    const token = sessionStorage.getItem("token");
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    });
+    this.http
+      .get<IUser>(URL.FETCHUSER + id, { headers })
+      .subscribe((user: IUser) =>
+        this.store.dispatch(new Action.AddUser(user))
+      );
   }
 
   signupService(user: User) {

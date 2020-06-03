@@ -1,48 +1,58 @@
 <div id="ongoingCourses">
   <h2>Let's Start Learning, {{ user.user ? user.user.firstName : null }}</h2>
-  <div class="row ongoing">
-    <div class="card">
-      <img
-        class="card-img-top"
-        style="height: 10rem; width: 20rem;"
-        src="https://cdn.searchenginejournal.com/wp-content/uploads/2019/04/the-seo-guide-to-angular.png"
-        alt="Card image cap"
-      />
-      <div class="card-body">
-        <h5 class="card-title">Angular - The Complete Guide (2020 edition)</h5>
-      </div>
-    </div>
-    <div class="card">
-      <img
-        class="card-img-top"
-        style="height: 10rem; width: 20rem;"
-        src="https://cdn.searchenginejournal.com/wp-content/uploads/2019/04/the-seo-guide-to-angular.png"
-        alt="Card image cap"
-      />
-      <div class="card-body">
-        <h5 class="card-title">Angular - The Complete Guide (2020 edition)</h5>
-      </div>
-    </div>
-    <div class="card">
-      <img
-        class="card-img-top"
-        style="height: 10rem; width: 20rem;"
-        src="https://cdn.searchenginejournal.com/wp-content/uploads/2019/04/the-seo-guide-to-angular.png"
-        alt="Card image cap"
-      />
-      <div class="card-body">
-        <h5 class="card-title">Angular - The Complete Guide (2020 edition)</h5>
-      </div>
-    </div>
-    <div class="card">
-      <img
-        class="card-img-top"
-        style="height: 10rem; width: 20rem;"
-        src="https://cdn.searchenginejournal.com/wp-content/uploads/2019/04/the-seo-guide-to-angular.png"
-        alt="Card image cap"
-      />
-      <div class="card-body">
-        <h5 class="card-title">Angular - The Complete Guide (2020 edition)</h5>
+  <div class="row ongoing" *ngIf="coursesEnrolled">
+    <div>
+      <div
+        id="carouselExampleIndicators"
+        class="carousel slide"
+        data-ride="carousel"
+        style="height: 20vh; width: 47vw; padding-left: 7vw;"
+      >
+        <div class="carousel-inner" role="listbox">
+          <div
+            class="carousel-item"
+            data-interval="10000"
+            style="width: 32vw;"
+            *ngFor="let course of coursesEnrolled; let i = index"
+            [ngClass]="{ active: i == 0 }"
+          >
+            <div class="card">
+              <img
+                class="card-img-top"
+                style="height: 100%; width: 25rem; padding: 7px;"
+                src="{{ course.image }}"
+                alt="{{ course.name }}"
+              />
+              <div class="card-body">
+                <h5 class="card-title" style="font-size: 21px;">
+                  {{ course.name }}
+                </h5>
+                <p style="font-size: 12px; margin-bottom: 3vw;">
+                  {{ course.shortDesc }}
+                </p>
+                <p style="color: darkgray;">By - {{ course.courseAuthor }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a
+          class="carousel-control-prev"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#carouselExampleIndicators"
+          role="button"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
     </div>
   </div>

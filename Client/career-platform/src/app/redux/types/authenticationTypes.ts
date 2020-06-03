@@ -1,3 +1,5 @@
+import { ICourses } from "src/app/models/models";
+
 export interface IState {
   token: string;
   user: IUser;
@@ -11,4 +13,5 @@ export interface IUser {
   lastName: string;
   password: string;
   userDetails: any;
+  courses?: Array<ICourses>;
 }

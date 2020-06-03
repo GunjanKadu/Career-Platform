@@ -4,7 +4,7 @@
 
 #ongoingCourses .card {
   flex-direction: row;
-  width: 46rem;
+  height: 20vh;
   margin-left: 1rem;
 }
 #ongoingCourses .ongoing {
@@ -23,4 +23,28 @@
   height: 7rem;
   width: 100%;
   width: 93vw;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 50px;
+  width: 50px;
+  outline: black;
+  background-size: 50%, 50%;
+  background-image: none;
+  background-color: white;
+  box-shadow: 0 3px 10px 1px grey;
+  border-radius: 50px;
+}
+
+.carousel-control-next-icon:after {
+  content: ">";
+  font-size: 31px;
+  color: #267892;
+}
+
+.carousel-control-prev-icon:after {
+  content: "<";
+  font-size: 31px;
+  color: #267892;
 }
