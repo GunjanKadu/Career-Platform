@@ -27,6 +27,7 @@ export class CoursedescComponent implements OnInit, DoCheck, OnDestroy {
   public user: IState;
   public isUserEnrolledForCourse: boolean;
   public courseRating: String;
+  public hasUserCreatedThisCourse: boolean;
   private userBuyedACourse: boolean = false;
 
   constructor(
@@ -64,7 +65,10 @@ export class CoursedescComponent implements OnInit, DoCheck, OnDestroy {
     setTimeout(() => {
       this.courseService
         .fetchCourseById(this.courseId)
-        .subscribe((course: ICourses) => (this.course = course));
+        .subscribe((course: ICourses) => {
+          this.course = course;
+          this.hasUserCreatedThisCourse = course.email === this.user.user.email;
+        });
       this.loading = false;
       this.courseRating = this.course.rating;
     }, 1000);

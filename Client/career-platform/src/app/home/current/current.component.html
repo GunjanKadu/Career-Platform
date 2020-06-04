@@ -1,13 +1,23 @@
 <div id="ongoingCourses">
-  <h2>Let's Start Learning, {{ user.user ? user.user.firstName : null }}</h2>
+  <h2 *ngIf="user.user && user.user.role === 'ROLE_USER'">
+    Let's Start Learning, {{ user.user ? user.user.firstName : null }}
+  </h2>
   <h2
-    style="text-align: center; font-weight: bolder; font-size: 27px;"
-    *ngIf="coursesEnrolled && coursesEnrolled.length != 0"
+    style="text-align: left; font-weight: bolder; font-size: 27px;"
+    *ngIf="
+      user.user &&
+      user.user.role === 'ROLE_USER' &&
+      coursesEnrolled &&
+      coursesEnrolled.length != 0
+    "
   >
     Currently Enrolled Course{{ coursesEnrolled.length == 1 ? null : "s" }}
   </h2>
   <div class="row ongoing" *ngIf="coursesEnrolled">
     <div>
+      <h2 style="text-align: center; margin-bottom: 2rem;">
+        Currently Enrolled Courses
+      </h2>
       <div
         id="carouselExampleIndicators"
         class="carousel slide"
@@ -61,6 +71,77 @@
         <a
           class="carousel-control-next"
           href="#carouselExampleIndicators"
+          role="button"
+          data-slide="next"
+          *ngIf="coursesEnrolled.length > 1"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <div *ngIf="user.user && user.user.role == 'ROLE_INSTRUCTOR'">
+      <h2 style="text-align: center; margin-bottom: 2rem;">
+        Currently Created Courses
+      </h2>
+
+      <div
+        id="currentlycreatedCourse"
+        class="carousel slide"
+        data-ride="carousel"
+        style="height: 20vh; width: 47vw; padding-left: 7vw;"
+      >
+        <div
+          class="carousel-inner"
+          role="listbox"
+          *ngIf="coursesCreatedByUser && coursesCreatedByUser.length != 0"
+        >
+          <div
+            class="carousel-item"
+            data-interval="10000"
+            style="width: 32vw;"
+            *ngFor="
+              let course of coursesCreatedByUser.slice().reverse();
+              let i = index
+            "
+            [ngClass]="{ active: i == 0 }"
+          >
+            <div
+              class="card"
+              style="cursor: pointer;"
+              [routerLink]="['/course', course.name, course.id]"
+            >
+              <img
+                class="card-img-top"
+                style="height: 100%; width: 25rem; padding: 7px;"
+                src="{{ course.image }}"
+                alt="{{ course.name }}"
+              />
+              <div class="card-body">
+                <h5 class="card-title" style="font-size: 21px;">
+                  {{ course.name }}
+                </h5>
+                <p style="font-size: 12px; margin-bottom: 3vw;">
+                  {{ course.shortDesc }}
+                </p>
+                <p style="color: darkgray;">By - {{ course.courseAuthor }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a
+          class="carousel-control-prev"
+          href="#currentlycreatedCourse"
+          role="button"
+          data-slide="prev"
+          *ngIf="coursesEnrolled.length > 1"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#currentlycreatedCourse"
           role="button"
           data-slide="next"
           *ngIf="coursesEnrolled.length > 1"

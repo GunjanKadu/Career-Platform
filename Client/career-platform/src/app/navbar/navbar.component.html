@@ -77,12 +77,17 @@
         class="btn"
         data-toggle="modal"
         data-target="#teachModal"
-        *ngIf="user.user.role === 'ROLE_USER'; else teachUdemy"
+        *ngIf="user.user && user.user.role === 'ROLE_USER'; else teachUdemy"
       >
         Teach On Udemy
       </button>
       <ng-template #teachUdemy>
-        <button class="btn" data-toggle="modal" data-target="#teachModal">
+        <button
+          style="width: 11rem;"
+          class="btn"
+          data-toggle="modal"
+          data-target="#teachModal"
+        >
           Create Your Course
         </button>
       </ng-template>

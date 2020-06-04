@@ -56,6 +56,17 @@ public class Courses {
     @Column(name = "course_author")
     private String courseAuthor;
 
+    @Column(name="email")
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
     private List<CourseLecture> courseLecture = new ArrayList<CourseLecture>();

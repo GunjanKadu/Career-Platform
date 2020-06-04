@@ -37,11 +37,29 @@
           *ngIf="!checkWhichButtonToShowForUserAction; else spinnerComponent"
         >
           <div class="cart" *ngIf="!isUserEnrolledForCourse; else deleteCourse">
-            <button class="btn btn-danger">WishList</button>
-            <button class="btn btn-light" (click)="registerCourse()">
+            <button
+              class="btn btn-danger"
+              [disabled]="hasUserCreatedThisCourse"
+            >
+              WishList
+            </button>
+            <button
+              class="btn btn-light"
+              [disabled]="hasUserCreatedThisCourse || !user.authenticated"
+              (click)="registerCourse()"
+            >
               Buy now
             </button>
 
+            <div
+              class="alert alert-danger"
+              *ngIf="hasUserCreatedThisCourse"
+              role="alert"
+            >
+              <span style="font-size: 12.5px;">
+                Cannot Enroll - This Course is created by you</span
+              >
+            </div>
             <div
               class="alert alert-danger"
               *ngIf="!user.authenticated"

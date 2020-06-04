@@ -23,6 +23,7 @@ export interface ICourses {
   image: string;
   shortDesc: string;
   courseAuthor: string;
+  email: string;
 }
 
 export interface ILecture {

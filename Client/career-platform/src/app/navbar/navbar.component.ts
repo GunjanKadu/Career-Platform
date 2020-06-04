@@ -189,6 +189,7 @@ export class NavbarComponent implements OnInit {
   onLogout() {
     console.log("logout");
     this.store.dispatch(new Action.Logout());
+    this.router.navigate(["/"]);
   }
   getBasicDetails(req: string) {
     if (this.user.user) {
