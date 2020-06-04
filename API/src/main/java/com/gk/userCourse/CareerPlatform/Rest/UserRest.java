@@ -32,7 +32,7 @@ public class UserRest {
     @GetMapping("/users/{userId}")
     public User getSingleUser(@PathVariable int userId) {
         User foundUser = userService.findbyId(userId);
-        if (userId < 0 || foundUser==null) {
+        if (userId < 0 || foundUser == null) {
             throw new UserNotFoundExecption("User Id Not Found - " + userId);
         }
         return foundUser;
@@ -72,6 +72,17 @@ public class UserRest {
     public User saveUsers(@PathVariable int userId, @RequestBody UserDetails theUserDetails) {
         User tempUser = userService.findbyId(userId);
         tempUser.setUserDetails(theUserDetails);
+        userService.save(tempUser);
+        return tempUser;
+    }
+
+    @PostMapping("/users/{userId}/changeToInstructor")
+    public User changeToInstructor(@PathVariable int userId) throws Exception {
+        User tempUser = userService.findbyId(userId);
+        if (tempUser == null) {
+            throw new Exception("User Not Found with Id " + userId);
+        }
+        tempUser.setRole("ROLE_INSTRUCTOR");
         userService.save(tempUser);
         return tempUser;
     }
