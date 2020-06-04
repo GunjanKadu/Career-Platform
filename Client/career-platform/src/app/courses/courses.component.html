@@ -151,7 +151,12 @@
         </div>
         <div class="highlight" *ngIf="i == 1">
           <div class="holder">
-            <h2>Find the right React course for you</h2>
+            <h2>
+              Find the right {{ searchTerm ? searchTerm : null }} course{{
+                searchTerm ? null : "s"
+              }}
+              for you
+            </h2>
             <p>Answer a few question fora custom recommendation</p>
           </div>
           <button class="btn">Get Started</button>
