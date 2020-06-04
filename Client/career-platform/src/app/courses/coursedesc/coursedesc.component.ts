@@ -1,5 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  DoCheck,
+} from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CourseserviceService } from "../courseservice.service";
 import { ICourses } from "src/app/models/models";
 import { Store } from "@ngrx/store";
@@ -11,20 +17,32 @@ import * as Action from "../../redux/actions/action";
   templateUrl: "./coursedesc.component.html",
   styleUrls: ["./coursedesc.component.css"],
 })
-export class CoursedescComponent implements OnInit {
+export class CoursedescComponent implements OnInit, DoCheck {
   private courseId: number;
   private courseName: string;
   public course: ICourses;
   public loading: boolean;
+  public checkWhichButtonToShowForUserAction: boolean;
   public user: IState;
   public isUserEnrolledForCourse: boolean;
   public courseRating: String;
+  private userBuyedACourse: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseserviceService,
-    private store: Store<RootState>
+    private store: Store<RootState>,
+    private router: Router
   ) {}
+  ngDoCheck(): void {
+    if (this.user.user && this.userBuyedACourse) {
+      this.store
+        .select("authentication")
+        .subscribe((user: IState) => (this.user = user));
+      this.isUserEnrolledForACourse();
+      this.userBuyedACourse = false;
+    }
+  }
 
   ngOnInit() {
     this.store
@@ -43,12 +61,22 @@ export class CoursedescComponent implements OnInit {
       this.courseRating = this.course.rating;
     }, 1000);
 
+    this.isUserEnrolledForACourse();
+  }
+
+  private isUserEnrolledForACourse() {
     if (this.user.user) {
-      this.user.user.courses.map((course) =>
-        course.id == this.courseId && course.name == this.courseName
-          ? (this.isUserEnrolledForCourse = true)
-          : false
-      );
+      this.checkWhichButtonToShowForUserAction = true;
+      console.log(this.checkWhichButtonToShowForUserAction);
+      setTimeout(() => {
+        this.user.user.courses.map((course) =>
+          course.id == this.courseId && course.name == this.courseName
+            ? (this.isUserEnrolledForCourse = true)
+            : false
+        );
+        this.checkWhichButtonToShowForUserAction = false;
+        console.log(this.checkWhichButtonToShowForUserAction);
+      }, 1500);
     }
   }
 
@@ -59,6 +87,7 @@ export class CoursedescComponent implements OnInit {
         .subscribe((res: ICourses[]) => {
           this.store.dispatch(new Action.AddCourseToUser(res));
           console.log(res);
+          this.userBuyedACourse = true;
         });
     }
   }
@@ -70,6 +99,7 @@ export class CoursedescComponent implements OnInit {
           this.store.dispatch(new Action.AddCourseToUser(res));
           console.log(res);
         });
+      this.router.navigate(["/courses"]);
     }
   }
 }

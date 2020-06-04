@@ -39,8 +39,7 @@ export class CourseserviceService {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     });
-    console.log(URL.ADDUSERTOCOURSE(id, courseId));
-    console.log(token);
+
     return this.http.delete<ICourses[]>(URL.ADDUSERTOCOURSE(id, courseId), {
       headers,
     });

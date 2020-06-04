@@ -33,27 +33,36 @@
             €{{ course.price }}
           </h1>
         </div>
-        <div class="cart" *ngIf="!isUserEnrolledForCourse; else deleteCourse">
-          <button class="btn btn-danger">WishList</button>
-          <button class="btn btn-light" (click)="registerCourse()">
-            Buy now
-          </button>
-        </div>
-        <ng-template #deleteCourse>
-          <div class="cart">
-            <p
-              style="
-                color: black;
-                text-align: center;
-                font-size: 20px;
-                font-weight: bold;
-              "
-            >
-              Already Enrolled In The Course
-            </p>
-            <button class="btn btn-danger" (click)="deRegisterCourse()">
-              Unenroll Now
+        <ng-container
+          *ngIf="!checkWhichButtonToShowForUserAction; else spinnerComponent"
+        >
+          <div class="cart" *ngIf="!isUserEnrolledForCourse; else deleteCourse">
+            <button class="btn btn-danger">WishList</button>
+            <button class="btn btn-light" (click)="registerCourse()">
+              Buy now
             </button>
+          </div>
+          <ng-template #deleteCourse>
+            <div class="cart">
+              <p
+                style="
+                  color: black;
+                  text-align: center;
+                  font-size: 20px;
+                  font-weight: bold;
+                "
+              >
+                Already Enrolled In The Course
+              </p>
+              <button class="btn btn-danger" (click)="deRegisterCourse()">
+                Unenroll Now
+              </button>
+            </div>
+          </ng-template>
+        </ng-container>
+        <ng-template #spinnerComponent>
+          <div class="loader" style="height: 20px; width: 20px;">
+            Loading...
           </div>
         </ng-template>
         <div class="info">
