@@ -17,6 +17,8 @@ import { TrendingComponent } from "./home/trending/trending.component";
 import { CurrentComponent } from "./home/current/current.component";
 import { CoursesComponent } from "./courses/courses.component";
 import { CoursedescComponent } from "./courses/coursedesc/coursedesc.component";
+import { CreatecourseComponent } from "./createcourse/createcourse.component";
+import { AuthGuard } from "./auth.guard.service";
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { CoursedescComponent } from "./courses/coursedesc/coursedesc.component";
     CurrentComponent,
     CoursesComponent,
     CoursedescComponent,
+    CreatecourseComponent,
   ],
   imports: [
     FormsModule,
@@ -41,7 +44,7 @@ import { CoursedescComponent } from "./courses/coursedesc/coursedesc.component";
     }),
     RatingModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
