@@ -7,7 +7,6 @@ import {
 import { Injectable, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { RootState } from "./redux";
-import { User } from "./navbar/authenticationService";
 import { IState } from "./redux/types/authenticationTypes";
 
 @Injectable()
@@ -29,7 +28,7 @@ export class AuthGuard implements CanActivate {
     | import("rxjs").Observable<boolean | import("@angular/router").UrlTree>
     | Promise<boolean | import("@angular/router").UrlTree> {
     const userToken = sessionStorage.getItem("token");
-    if (userToken && this.user && this.user.authenticated) {
+    if (userToken && this.user && this.user.user.role === "ROLE_INSTRUCTOR") {
       return true;
     } else {
       this.router.navigate([""]);
