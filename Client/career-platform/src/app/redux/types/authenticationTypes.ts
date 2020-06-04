@@ -14,4 +14,5 @@ export interface IUser {
   password: string;
   userDetails: any;
   courses?: Array<ICourses>;
+  role: string;
 }

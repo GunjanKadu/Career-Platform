@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
         return "back9";
         break;
       default:
+        return "back9";
         break;
     }
   }

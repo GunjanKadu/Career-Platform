@@ -112,3 +112,18 @@
 /* Login Form */
 
 /* Login Modal */
+
+/* teach on udemy  */
+.back-image {
+  background: #505763
+    url(https://udemy-images.udemy.com/teaching/header-image.jpg) right top
+    no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  color: white;
+}
+.modal-backdrop.show {
+  opacity: 0.2;
+}

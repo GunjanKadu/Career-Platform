@@ -58,6 +58,21 @@ export class AuthenticationService {
       headers,
     });
   }
+
+  changeUserToInstructor(id: number) {
+    const token = sessionStorage.getItem("token");
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<IUser>(
+      URL.CHANGETOINSTRUCTOR(id),
+      {},
+      {
+        headers,
+      }
+    );
+  }
 }
 
 export interface User {

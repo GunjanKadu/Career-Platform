@@ -73,7 +73,19 @@
       </li>
     </ul>
     <div class="teach mycourses" *ngIf="user.authenticated">
-      <button class="btn">Teach On Udemy</button>
+      <button
+        class="btn"
+        data-toggle="modal"
+        data-target="#teachModal"
+        *ngIf="user.user.role === 'ROLE_USER'; else teachUdemy"
+      >
+        Teach On Udemy
+      </button>
+      <ng-template #teachUdemy>
+        <button class="btn" data-toggle="modal" data-target="#teachModal">
+          Create Your Course
+        </button>
+      </ng-template>
       <button disabled style="color: black;">|</button>
       <button class="btn">My Courses ▼</button>
     </div>
@@ -232,7 +244,7 @@
         <p style="margin-top: 2.5rem; text-align: center;">
           Dont have an account?
           <button
-            style="color: #395999; border: none;"
+            style="color: red; border: none; background-color: white;"
             data-toggle="modal"
             data-dismiss="modal"
             data-target="#signupModal"
@@ -485,6 +497,55 @@
             <span *ngIf="!isLoading"> Save</span>
           </button>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Teach On Udemy -->
+<div
+  class="modal fade"
+  id="teachModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+  style="background: rgba(0, 0, 0, 0.5);"
+>
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content" style="height: 50vh; margin-left: 11vw;">
+      <div class="modal-header">
+        <h5
+          class="modal-title text-center"
+          id="exampleTeachModalLongTitle"
+          style="color: black;"
+        >
+          Teach On Udemy Advantages
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="back-image">
+          <h1 style="font-size: 50px; margin-bottom: 3rem;">
+            Make a global impact
+          </h1>
+          <p style="width: 56%;">
+            Create an online video course and earn money by teaching people
+            around the world.
+          </p>
+          <p style="width: 56%;">
+            Inspire Students
+          </p>
+          <p style="width: 56%;">
+            Join Our Community
+          </p>
+          <button
+            class="btn btn-danger"
+            style="margin-top: 10%; width: 13vw;"
+            (click)="becomeInstructor()"
+          >
+            Become an instructor
+          </button>
+        </div>
       </div>
     </div>
   </div>

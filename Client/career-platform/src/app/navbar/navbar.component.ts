@@ -153,6 +153,7 @@ export class NavbarComponent implements OnInit {
       lastName: this.userDetailsFormData.value.lastName,
       password: this.userDetailsFormData.value.password,
       email: this.userDetailsFormData.value.email,
+      role: this.user.user.role,
       userDetails: {
         id: this.user.user.id,
         description: this.userDetailsFormData.value.userHeadline,
@@ -177,7 +178,11 @@ export class NavbarComponent implements OnInit {
         );
     }, 1000);
   }
-
+  becomeInstructor() {
+    this.authenticationService
+      .changeUserToInstructor(this.user.user.id)
+      .subscribe((res) => console.log(res));
+  }
   disableError() {
     this.error = null;
   }
