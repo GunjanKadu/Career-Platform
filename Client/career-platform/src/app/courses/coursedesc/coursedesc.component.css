@@ -38,6 +38,9 @@
   box-shadow: 0 3px 10px 1px grey;
   margin-left: 11vw;
 }
+.price_content img {
+  height: 22rem;
+}
 .image img {
   padding: 7px;
   width: 100%;

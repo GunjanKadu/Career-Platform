@@ -77,7 +77,29 @@ export class NavbarComponent implements OnInit {
           .pipe(
             tap((user: IUser) => this.store.dispatch(new Action.AddUser(user)))
           )
-          .subscribe((user: IUser) => user);
+          .subscribe((user: IUser) => {
+            let courseNameToNavigate = sessionStorage.getItem("course");
+            let courseIdToNavigate = parseInt(sessionStorage.getItem("id"));
+
+            if (
+              courseIdToNavigate &&
+              courseNameToNavigate &&
+              this.user.authenticated
+            ) {
+              this.router
+                .navigateByUrl("/", { skipLocationChange: true })
+                .then(() => {
+                  this.router.navigate([
+                    "/course/",
+                    courseNameToNavigate,
+                    courseIdToNavigate,
+                  ]);
+                  sessionStorage.removeItem("course");
+                  sessionStorage.removeItem("id");
+                });
+            }
+            return user;
+          });
       },
       (error: any) => {
         this.isLoading = false;

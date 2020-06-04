@@ -19,7 +19,10 @@
             class="carousel-item"
             data-interval="10000"
             style="width: 32vw;"
-            *ngFor="let course of coursesEnrolled; let i = index"
+            *ngFor="
+              let course of coursesEnrolled.slice().reverse();
+              let i = index
+            "
             [ngClass]="{ active: i == 0 }"
           >
             <div

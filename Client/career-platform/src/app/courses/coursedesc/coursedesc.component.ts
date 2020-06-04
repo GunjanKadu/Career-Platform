@@ -4,6 +4,7 @@ import {
   OnChanges,
   SimpleChanges,
   DoCheck,
+  OnDestroy,
 } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CourseserviceService } from "../courseservice.service";
@@ -17,7 +18,7 @@ import * as Action from "../../redux/actions/action";
   templateUrl: "./coursedesc.component.html",
   styleUrls: ["./coursedesc.component.css"],
 })
-export class CoursedescComponent implements OnInit, DoCheck {
+export class CoursedescComponent implements OnInit, DoCheck, OnDestroy {
   private courseId: number;
   private courseName: string;
   public course: ICourses;
@@ -34,6 +35,10 @@ export class CoursedescComponent implements OnInit, DoCheck {
     private store: Store<RootState>,
     private router: Router
   ) {}
+  ngOnDestroy(): void {
+    sessionStorage.removeItem("course");
+    sessionStorage.removeItem("id");
+  }
   ngDoCheck(): void {
     if (this.user.user && this.userBuyedACourse) {
       this.store
@@ -52,6 +57,9 @@ export class CoursedescComponent implements OnInit, DoCheck {
     this.courseId = this.route.snapshot.params["id"];
     this.courseName = this.route.snapshot.params["courseName"];
     this.loading = true;
+
+    sessionStorage.setItem("course", this.courseName);
+    sessionStorage.setItem("id", this.courseId.toString());
 
     setTimeout(() => {
       this.courseService
@@ -99,7 +107,9 @@ export class CoursedescComponent implements OnInit, DoCheck {
           this.store.dispatch(new Action.AddCourseToUser(res));
           console.log(res);
         });
-      this.router.navigate(["/courses"]);
+      this.router.navigateByUrl("/", { skipLocationChange: true }).then(() => {
+        this.router.navigate(["/course/", this.courseName, this.courseId]);
+      });
     }
   }
 }
