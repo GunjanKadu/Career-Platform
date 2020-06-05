@@ -1,6 +1,4 @@
 .form {
-  height: 100%;
-  width: 100%;
   height: 70vh;
   margin-top: 10vh;
   box-shadow: 0 3px 10px 1px grey;
@@ -8,4 +6,35 @@
 .topic {
   margin-top: 10vh;
   margin-right: 1vw;
+  height: 70vh;
+}
+.topic h2 {
+  text-align: center;
+  padding-top: 14px;
+  font-size: 15px;
+  margin-bottom: 2.5rem;
+}
+.formgroup {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  height: 28px;
+  padding-left: 20px;
+}
+.formgroup input {
+  margin-right: 10px;
+}
+.active {
+  border-left: red 5px solid;
+  padding-left: 15px;
+}
+.group {
+  display: flex;
+  flex-direction: row;
+}
+.form-general {
+  padding-top: 4rem;
+}
+label {
+  font-weight: 500;
 }

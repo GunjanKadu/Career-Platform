@@ -1,8 +1,184 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3 topic">Course Topics</div>
+    <div class="col-md-3">
+      <div class="topic">
+        <h2>
+          Plan You Course
+        </h2>
+        <div class="formgroup" [ngClass]="{ active: selectedValue === 'info' }">
+          <input
+            type="radio"
+            id="info"
+            name="info"
+            value="info"
+            [checked]="selectedValue === 'info'"
+            (change)="whichFormToShow('info')"
+          />
+          <label for="info">General</label>
+        </div>
+        <div
+          class="formgroup"
+          [ngClass]="{ active: selectedValue === 'description' }"
+        >
+          <input
+            type="radio"
+            id="description"
+            name="description"
+            value="description"
+            [checked]="selectedValue === 'description'"
+            (change)="whichFormToShow('description')"
+          />
+          <label for="description">Course Description</label>
+        </div>
+        <div
+          class="formgroup"
+          [ngClass]="{ active: selectedValue === 'content' }"
+        >
+          <input
+            type="radio"
+            id="content"
+            name="content"
+            value="content"
+            [checked]="selectedValue === 'content'"
+            (change)="whichFormToShow('content')"
+          />
+          <label for="content">Content</label>
+        </div>
+      </div>
+    </div>
     <div class="col-md-8">
-      <div class="form"></div>
+      <div class="form">
+        <div class="form-general col-md 8" *ngIf="selectedValue === 'info'">
+          <h3 style="text-align: center; margin-bottom: 2rem;">Course Info</h3>
+          <form>
+            <div class="form-group row">
+              <label for="courseName" class="col-sm-3 col-form-label"
+                >Course Name</label
+              >
+              <div class="col-sm-7">
+                <input type="text" class="form-control" id="courseName" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="category" class="col-sm-3 col-form-label"
+                >Category</label
+              >
+              <div class="col-sm-7">
+                <select class="form-control form-control" id="Category">
+                  <option>Web</option>
+                  <option>Software</option>
+                  <option>Design</option>
+                  <option>Embedded</option>
+                  <option>Others</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="level" class="col-sm-3 col-form-label">Level</label>
+              <div class="col-sm-7">
+                <select class="form-control form-control" id="level">
+                  <option>Beginners</option>
+                  <option>Intermediate</option>
+                  <option>Advanced</option>
+                  <option>Expert</option>
+                  <option>Professional</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="s_desc" class="col-sm-3 col-form-label"
+                >Short Description</label
+              >
+              <div class="col-sm-7">
+                <textarea
+                  class="form-control"
+                  id="s_desc"
+                  rows="3"
+                  placeholder="Become an expert in ..."
+                ></textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="lectures" class="col-sm-3 col-form-label"
+                >Total Lectures
+              </label>
+              <div class="col-sm-7">
+                <input type="number" class="form-control" id="lectures" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="hours" class="col-sm-3 col-form-label"
+                >Total Hours
+              </label>
+              <div class="col-sm-7">
+                <input type="number" class="form-control" id="hours" />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="lectures" class="col-sm-3 col-form-label"
+                >Price</label
+              >
+              <div class="col-sm-7">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="lectures"
+                  placeholder="€"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="image" class="col-sm-3 col-form-label"
+                >Image URL</label
+              >
+              <div class="col-sm-7">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="image"
+                  (change)="onImageSelect($event)"
+                />
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="imagePreview">
+              <label for="image" class="col-sm-3 col-form-label"
+                >Image Preview</label
+              >
+              <div class="col-sm-7">
+                <img
+                  [src]="imagePreview"
+                  alt="Image"
+                  style="height: 15rem; width: 18rem;"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div
+          class="form-general col-md 8"
+          *ngIf="selectedValue === 'description'"
+        >
+          <h3 style="text-align: center; margin-bottom: 2rem;">
+            Course Description
+          </h3>
+          <form>
+            <div class="form-group row">
+              <label for="desc" class="col-sm-3 col-form-label">
+                Detail Description</label
+              >
+              <div class="col-sm-7">
+                <textarea class="form-control" id="desc" rows="15"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="form-general col-md 8" *ngIf="selectedValue === 'content'">
+          <h3 style="text-align: center; margin-bottom: 2rem;">
+            Course Lectures
+          </h3>
+          <form></form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
