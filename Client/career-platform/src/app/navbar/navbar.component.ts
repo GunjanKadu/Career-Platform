@@ -28,6 +28,8 @@ export class NavbarComponent implements OnInit {
   @ViewChild("closeSignUpModal",{static:false}) closeSignUpModal: ElementRef;
   // prettier-ignore
   @ViewChild("closeUserDetailsModal", { static: false }) closeUserDetailsModal: ElementRef;
+  // prettier-ignore
+  @ViewChild("closeCreateCourseModal", { static: false }) closeCreateCourseModal: ElementRef;
 
   public firstName: string;
   public lastName: string;
@@ -177,6 +179,12 @@ export class NavbarComponent implements OnInit {
           }
         );
     }, 1000);
+  }
+
+  viewExistingCreatedCourse() {
+    let token = sessionStorage.getItem("token");
+    this.closeCreateCourseModal.nativeElement.click();
+    this.router.navigate(["courses/createdCourses", token]);
   }
   becomeInstructor() {
     this.authenticationService

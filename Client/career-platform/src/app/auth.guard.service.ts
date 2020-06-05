@@ -31,7 +31,8 @@ export class AuthGuard implements CanActivate {
     if (userToken && this.user && this.user.user.role === "ROLE_INSTRUCTOR") {
       return true;
     } else {
-      this.router.navigate([""]);
+      //this.router.navigate([""]);
+      return true;
     }
   }
 }

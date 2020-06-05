@@ -1,0 +1,10 @@
+.d-flex {
+  justify-content: space-between;
+}
+#createView .container {
+  margin: 31vh 32vw;
+}
+#createView .card {
+  margin: 6rem 0rem;
+  height: 11rem;
+}

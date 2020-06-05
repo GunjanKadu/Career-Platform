@@ -10,6 +10,10 @@ const appRoutes: Routes = [
   { path: "", component: HomeComponent },
   { path: "courses", component: CoursesComponent },
   { path: "courses/:courseName", component: CoursesComponent },
+  {
+    path: "courses/createdCourses/:token",
+    component: CoursesComponent,
+  },
   { path: "course/:courseName/:id", component: CoursedescComponent },
   {
     path: "createcourse",

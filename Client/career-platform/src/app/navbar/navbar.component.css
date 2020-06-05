@@ -127,3 +127,20 @@
 .modal-backdrop.show {
   opacity: 0.2;
 }
+
+/* createORview */
+#viewOrCreate .back-image {
+  background: #505763 url(../../assets/img/teach.jpg) right top no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  color: white;
+}
+
+#viewOrCreate .container,
+#viewOrCreate .modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
