@@ -28,11 +28,13 @@ export class AuthGuard implements CanActivate {
     | import("rxjs").Observable<boolean | import("@angular/router").UrlTree>
     | Promise<boolean | import("@angular/router").UrlTree> {
     const userToken = sessionStorage.getItem("token");
-    if (userToken && this.user && this.user.user.role === "ROLE_INSTRUCTOR") {
-      return true;
-    } else {
-      this.router.navigate(["/"]);
-      //return true;
+    if (this.user.authenticated) {
+      if (userToken && this.user && this.user.user.role === "ROLE_INSTRUCTOR") {
+        return true;
+      } else {
+        this.router.navigate(["/"]);
+        //return true;
+      }
     }
   }
 }

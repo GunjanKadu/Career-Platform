@@ -50,13 +50,20 @@
       <div class="form">
         <div class="form-general col-md 8" *ngIf="selectedValue === 'info'">
           <h3 style="text-align: center; margin-bottom: 2rem;">Course Info</h3>
-          <form>
+          <form (ngSubmit)="onSubmitCourseInfo()" #courseInfoData="ngForm">
             <div class="form-group row">
               <label for="courseName" class="col-sm-3 col-form-label"
                 >Course Name</label
               >
               <div class="col-sm-7">
-                <input type="text" class="form-control" id="courseName" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="courseName"
+                  ngModel
+                  name="courseName"
+                  required
+                />
               </div>
             </div>
             <div class="form-group row">
@@ -64,7 +71,13 @@
                 >Category</label
               >
               <div class="col-sm-7">
-                <select class="form-control form-control" id="Category">
+                <select
+                  class="form-control form-control"
+                  id="Category"
+                  ngModel
+                  name="category"
+                  required
+                >
                   <option>Web</option>
                   <option>Software</option>
                   <option>Design</option>
@@ -73,18 +86,7 @@
                 </select>
               </div>
             </div>
-            <div class="form-group row">
-              <label for="level" class="col-sm-3 col-form-label">Level</label>
-              <div class="col-sm-7">
-                <select class="form-control form-control" id="level">
-                  <option>Beginners</option>
-                  <option>Intermediate</option>
-                  <option>Advanced</option>
-                  <option>Expert</option>
-                  <option>Professional</option>
-                </select>
-              </div>
-            </div>
+
             <div class="form-group row">
               <label for="s_desc" class="col-sm-3 col-form-label"
                 >Short Description</label
@@ -95,6 +97,9 @@
                   id="s_desc"
                   rows="3"
                   placeholder="Become an expert in ..."
+                  ngModel
+                  name="shortDescription"
+                  required
                 ></textarea>
               </div>
             </div>
@@ -103,7 +108,14 @@
                 >Total Lectures
               </label>
               <div class="col-sm-7">
-                <input type="number" class="form-control" id="lectures" />
+                <input
+                  type="number"
+                  class="form-control"
+                  id="lectures"
+                  ngModel
+                  required
+                  name="totallectures"
+                />
               </div>
             </div>
             <div class="form-group row">
@@ -111,19 +123,27 @@
                 >Total Hours
               </label>
               <div class="col-sm-7">
-                <input type="number" class="form-control" id="hours" />
+                <input
+                  type="number"
+                  class="form-control"
+                  id="hours"
+                  ngModel
+                  name="totalhours"
+                  required
+                />
               </div>
             </div>
             <div class="form-group row">
-              <label for="lectures" class="col-sm-3 col-form-label"
-                >Price</label
-              >
+              <label for="price" class="col-sm-3 col-form-label">Price</label>
               <div class="col-sm-7">
                 <input
                   type="number"
                   class="form-control"
-                  id="lectures"
+                  id="price"
                   placeholder="€"
+                  ngModel
+                  name="price"
+                  required
                 />
               </div>
             </div>
@@ -137,6 +157,9 @@
                   class="form-control"
                   id="image"
                   (change)="onImageSelect($event)"
+                  ngModel
+                  name="imageurl"
+                  required
                 />
               </div>
             </div>
@@ -152,6 +175,33 @@
                 />
               </div>
             </div>
+            <div class="form-group row">
+              <label for="level" class="col-sm-3 col-form-label">Level</label>
+              <div class="col-sm-7">
+                <select
+                  class="form-control form-control"
+                  id="level"
+                  ngModel
+                  name="level"
+                  required
+                >
+                  <option>Beginners</option>
+                  <option>Intermediate</option>
+                  <option>Advanced</option>
+                  <option>Expert</option>
+                  <option>Professional</option>
+                </select>
+              </div>
+            </div>
+            <div class="submit">
+              <button
+                class="btn btn-danger"
+                type="submit"
+                [disabled]="!courseInfoData.valid"
+              >
+                Next
+              </button>
+            </div>
           </form>
         </div>
         <div
@@ -161,14 +211,33 @@
           <h3 style="text-align: center; margin-bottom: 2rem;">
             Course Description
           </h3>
-          <form>
+          <form
+            (ngSubmit)="onSubmitCourseFinalCourse()"
+            #descriptionForm="ngForm"
+          >
             <div class="form-group row">
               <label for="desc" class="col-sm-3 col-form-label">
                 Detail Description</label
               >
               <div class="col-sm-7">
-                <textarea class="form-control" id="desc" rows="15"></textarea>
+                <textarea
+                  class="form-control"
+                  id="desc"
+                  rows="15"
+                  name="description"
+                  ngModel
+                  required
+                ></textarea>
               </div>
+            </div>
+            <div class="submit">
+              <button
+                class="btn btn-danger"
+                type="submit"
+                [disabled]="!descriptionForm.valid"
+              >
+                Create Course
+              </button>
             </div>
           </form>
         </div>

@@ -42,7 +42,7 @@ public class Courses {
     private String totalHours;
 
     @Column(name = "rating")
-    private String rating;
+    private String rating ="3";
 
     @Column(name = "level")
     private String level;
