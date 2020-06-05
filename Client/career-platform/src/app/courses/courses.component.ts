@@ -2,11 +2,11 @@ import { Component, OnInit } from "@angular/core";
 
 import { CourseserviceService } from "./courseservice.service";
 import { ICourses } from "../models/models";
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import * as jwt_decode from "jwt-decode";
 import { Store } from "@ngrx/store";
 import { RootState } from "../redux";
-import { IUser, IState } from "../redux/types/authenticationTypes";
+import { IState } from "../redux/types/authenticationTypes";
 
 @Component({
   selector: "app-courses",
@@ -17,6 +17,7 @@ export class CoursesComponent implements OnInit {
   constructor(
     private courseService: CourseserviceService,
     private route: ActivatedRoute,
+    private router: Router,
     private store: Store<RootState>
   ) {}
 
@@ -29,7 +30,6 @@ export class CoursesComponent implements OnInit {
   public loading: boolean = true;
 
   ngOnInit() {
-    console.log(this.route);
     setTimeout(() => {
       this.route.params.subscribe((params: Params) => {
         console.log(params);
@@ -40,7 +40,10 @@ export class CoursesComponent implements OnInit {
           this.store
             .select("authentication")
             .subscribe((state: IState) => (this.user = state));
-          if (this.user.user.email == decodedToken.sub) {
+          if (
+            this.user.authenticated &&
+            this.user.user.email == decodedToken.sub
+          ) {
             this.courseService
               .fetchAllCourses()
               .subscribe((courses: Array<ICourses>) => {
@@ -51,8 +54,9 @@ export class CoursesComponent implements OnInit {
                 this.lengthOfResults = coursesCreatedByUser.length;
                 this.loading = false;
               });
+          } else if (!this.user.authenticated) {
+            this.router.navigate(["/"]);
           }
-          console.log(jwt_decode(this.token));
         } else {
           this.courseService
             .fetchAllCourses()

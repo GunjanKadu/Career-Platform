@@ -92,7 +92,10 @@
     </ng-template>
     <div *ngIf="user.user && user.user.role == 'ROLE_INSTRUCTOR'">
       <h2 style="text-align: center; margin-bottom: 2rem;">
-        Course{{ coursesCreatedByUser.length == 1 ? null : "s" }} Created By You
+        Course{{
+          coursesCreatedByUser && coursesCreatedByUser.length == 1 ? null : "s"
+        }}
+        Created By You
       </h2>
 
       <div

@@ -1,10 +1,11 @@
-.d-flex {
-  justify-content: space-between;
+.form {
+  height: 100%;
+  width: 100%;
+  height: 70vh;
+  margin-top: 10vh;
+  box-shadow: 0 3px 10px 1px grey;
 }
-#createView .container {
-  margin: 31vh 32vw;
-}
-#createView .card {
-  margin: 6rem 0rem;
-  height: 11rem;
+.topic {
+  margin-top: 10vh;
+  margin-right: 1vw;
 }

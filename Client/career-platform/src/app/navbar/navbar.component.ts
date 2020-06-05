@@ -186,6 +186,10 @@ export class NavbarComponent implements OnInit {
     this.closeCreateCourseModal.nativeElement.click();
     this.router.navigate(["courses/createdCourses", token]);
   }
+  createNewCourse() {
+    this.closeCreateCourseModal.nativeElement.click();
+    this.router.navigate(["/createcourse"]);
+  }
   becomeInstructor() {
     this.authenticationService
       .changeUserToInstructor(this.user.user.id)

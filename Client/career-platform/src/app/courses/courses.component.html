@@ -4,7 +4,10 @@
       searchTerm
     }}"
   </h1>
-  <h1 class="result" *ngIf="!searchTerm">Found {{ courses.length }} Courses</h1>
+  <h1 class="result" *ngIf="!searchTerm">
+    Found {{ courses.length }} Course{{ lengthOfResults >= 1 ? "s" : null }}
+    {{ token ? "Created By You" : null }}
+  </h1>
   <div class="row">
     <div class="filters col-md-2">
       <hr />
@@ -149,18 +152,20 @@
             </p>
           </div>
         </div>
-        <div class="highlight" *ngIf="i == 1">
-          <div class="holder">
-            <h2>
-              Find the right {{ searchTerm ? searchTerm : null }} course{{
-                searchTerm ? null : "s"
-              }}
-              for you
-            </h2>
-            <p>Answer a few question fora custom recommendation</p>
+        <ng-container *ngIf="!token">
+          <div class="highlight" *ngIf="i == 1">
+            <div class="holder">
+              <h2>
+                Find the right {{ searchTerm ? searchTerm : null }} course{{
+                  searchTerm ? null : "s"
+                }}
+                for you
+              </h2>
+              <p>Answer a few question fora custom recommendation</p>
+            </div>
+            <button class="btn">Get Started</button>
           </div>
-          <button class="btn">Get Started</button>
-        </div>
+        </ng-container>
       </a>
     </div>
   </div>
