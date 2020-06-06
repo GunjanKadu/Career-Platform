@@ -127,4 +127,28 @@ public class Courses {
         throw new Exception("The Specified Course or User Not Found");
     }
 
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_INSTRUCTOR"})
+    @PutMapping("/courses/{courseId}")
+    @Transactional
+    public com.gk.userCourse.CareerPlatform.Entity.Courses updateCourse(@PathVariable int courseId, @RequestBody com.gk.userCourse.CareerPlatform.Entity.Courses courses) throws Exception {
+        Optional<com.gk.userCourse.CareerPlatform.Entity.Courses> courseToBeUpdated = coursesService.findById(courseId);
+
+        if (courseToBeUpdated.isPresent()) {
+            courseToBeUpdated.get().setName(courses.getName());
+            courseToBeUpdated.get().setDesc(courses.getDesc());
+            courseToBeUpdated.get().setTotalLectures(courses.getTotalLectures());
+            courseToBeUpdated.get().setCategory(courses.getCategory());
+            courseToBeUpdated.get().setPrice(courses.getPrice());
+            courseToBeUpdated.get().setTotalHours(courses.getTotalHours());
+            courseToBeUpdated.get().setRating(courses.getRating());
+            courseToBeUpdated.get().setLevel(courses.getLevel());
+            courseToBeUpdated.get().setImage(courses.getImage());
+            courseToBeUpdated.get().setShortDesc(courses.getShortDesc());
+            coursesService.saveCourses(courseToBeUpdated.get());
+            return courses;
+        }
+        throw new Exception("The Specified Course Not Found");
+    }
+
+
 }

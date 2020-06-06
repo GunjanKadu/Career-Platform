@@ -26,6 +26,7 @@ public class Login {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUserName(),
 					authRequest.getPasswordString()));
+
 		} catch (Exception e) {
 			throw new Exception("Invalid UserName or password");
 		}
