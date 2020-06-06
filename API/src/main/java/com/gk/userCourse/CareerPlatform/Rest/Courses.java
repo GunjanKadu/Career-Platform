@@ -150,5 +150,25 @@ public class Courses {
         throw new Exception("The Specified Course Not Found");
     }
 
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_INSTRUCTOR"})
+    @DeleteMapping("/lectures/{lectureId}/courses/{courseId}")
+    public Optional<com.gk.userCourse.CareerPlatform.Entity.Courses> deleteLectureFromCour(@PathVariable int courseId, @PathVariable int lectureId) throws Exception {
+        Optional<com.gk.userCourse.CareerPlatform.Entity.Courses> courseToBeUpdated = coursesService.findById(courseId);
+        if (courseToBeUpdated.isPresent()) {
+            List<CourseLecture> courseLecture = courseToBeUpdated.get().getCourseLecture();
+            if (courseLecture.stream().anyMatch(lecture -> lecture.getId() == lectureId)) {
+                List<CourseLecture> updatedLectures = courseLecture.stream().filter(lecture -> lecture.getId() != lectureId).collect(Collectors.toList());
+                courseToBeUpdated.get().setCourseLecture(updatedLectures);
+                coursesService.saveCourses(courseToBeUpdated.get());
+                coursesService.deleteLectures(lectureId);
+                return courseToBeUpdated;
+            } else {
+                throw new Exception("Lecture Not Found in the Specified Course");
+            }
+
+        } else {
+            throw new Exception("Course Not Found" + courseId);
+        }
+    }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { ICreatedCourse, ICourses, ILecture } from "../models/models";
 import { RootState } from "../redux";
@@ -104,23 +104,28 @@ export class CreatecourseComponent implements OnInit {
     }
   }
   onSubmitLecture() {
-    const lecture: ILecture = {
-      title: this.lectureInfo.value.lectureTitle,
-      desc: this.lectureInfo.value.lectureDescription,
-    };
+    if (this.existingCourse) {
+      const lecture: ILecture = {
+        title: this.lectureInfo.value.lectureTitle,
+        desc: this.lectureInfo.value.lectureDescription,
+      };
+      this.courseService
+        .addLectureToCourse(lecture, this.existingCourse.id)
+        .subscribe((res) => {
+          this.showCourseSuccess = true;
+          setTimeout(() => {
+            this.courseService
+              .fetchCourseById(this.existingCourse.id)
+              .subscribe((course: ICourses) => (this.existingCourse = course));
+          }, 1000);
+          console.log(res);
+          this.lectureInfo.resetForm();
+        });
+    }
+  }
+  deleteLecture(lectureId: number) {
     this.courseService
-      .addLectureToCourse(lecture, this.existingCourse.id)
-      .subscribe((res) => {
-        this.showCourseSuccess = true;
-        setTimeout(() => {
-          this.courseService
-            .fetchCourseById(this.existingCourse.id)
-            .subscribe((course: ICourses) => (this.existingCourse = course));
-          this.showCourseSuccess = false;
-        }, 1000);
-
-        console.log(res);
-        this.lectureInfo.resetForm();
-      });
+      .deleteLectureFromCourse(lectureId, this.existingCourse.id)
+      .subscribe((course: ICourses) => (this.existingCourse = course));
   }
 }

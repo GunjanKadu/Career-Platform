@@ -33,6 +33,7 @@
         <div
           class="formgroup"
           [ngClass]="{ active: selectedValue === 'content' }"
+          *ngIf="existingCourse"
         >
           <input
             type="radio"
@@ -250,18 +251,23 @@
           </h3>
           <div
             class="lecture_container"
-            style="max-height: 29vh; overflow: hidden; overflow-y: auto;"
+            style="
+              height: 29vh;
+              max-height: 29vh;
+              overflow: hidden;
+              overflow-y: auto;
+            "
             *ngIf="
-              existingCourse &&
-                existingCourse.courseLecture &&
-                !showCourseSuccess;
-              else spinner
+              existingCourse && existingCourse.courseLecture.length != 0;
+              else noLectures
             "
           >
             <div
               class="alert alert-secondary"
               role="alert"
-              *ngFor="let lecture of existingCourse.courseLecture"
+              *ngFor="
+                let lecture of existingCourse.courseLecture.slice().reverse()
+              "
               style="
                 display: flex;
                 flex-direction: row;
@@ -274,19 +280,32 @@
                 <h1 style="font-size: 15px; font-weight: bold;">
                   {{ lecture.title }}
                 </h1>
-                <h3 style="font-size: 12px;">{{ lecture.desc }}</h3>
+                <h3 style="font-size: 12px;">
+                  {{ lecture.desc | slice: 1:70 }}...
+                </h3>
               </div>
               <div class="buttons">
                 <button style="margin-right: 10px;" class="btn btn-success">
                   Edit
                 </button>
-                <button class="btn btn-danger">Delete</button>
+                <button
+                  class="btn btn-danger"
+                  (click)="deleteLecture(lecture.id)"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>
-          <ng-template #spinner>
-            <div class="loader" style="height: 20px; width: 20px;">
-              Loading...
+          <ng-template #noLectures>
+            <div style="height: 29vh; width: 100%;">
+              <div
+                class="alert alert-danger"
+                role="alert"
+                style="width: fit-content; height: fit-content; margin: auto;"
+              >
+                No Present Lectures For This Course
+              </div>
             </div>
           </ng-template>
           <hr />
@@ -308,6 +327,7 @@
                   ngModel
                   name="lectureTitle"
                   required
+                  (change)="showCourseSuccess = false"
                 />
               </div>
             </div>
@@ -323,6 +343,7 @@
                   name="lectureDescription"
                   ngModel
                   required
+                  (change)="showCourseSuccess = false"
                 ></textarea>
               </div>
             </div>

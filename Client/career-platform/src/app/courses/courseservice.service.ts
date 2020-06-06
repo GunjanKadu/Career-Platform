@@ -83,4 +83,14 @@ export class CourseserviceService {
       }
     );
   }
+  deleteLectureFromCourse(lectureId: number, courseId: number) {
+    const token = sessionStorage.getItem("token");
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.delete<ICourses>(URL.DELETELECTURE(courseId, lectureId), {
+      headers,
+    });
+  }
 }
