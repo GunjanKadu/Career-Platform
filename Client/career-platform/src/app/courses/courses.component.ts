@@ -23,7 +23,7 @@ export class CoursesComponent implements OnInit {
 
   public courses: Array<ICourses>;
   public lecture: any;
-  private user: IState;
+  public user: IState;
   public searchTerm: string = null;
   public token: string = null;
   public lengthOfResults: number;

@@ -31,3 +31,18 @@ export interface ILecture {
   id: number;
   title: String;
 }
+
+export interface ICreatedCourse {
+  id?: number;
+  name?: string;
+  totalLectures?: number;
+  category?: string;
+  price?: string;
+  totalHours?: string;
+  level?: string;
+  image?: string;
+  shortDesc?: string;
+  courseAuthor?: string;
+  email?: string;
+  desc?: string;
+}

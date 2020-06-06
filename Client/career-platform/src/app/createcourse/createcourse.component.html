@@ -239,6 +239,9 @@
                 Create Course
               </button>
             </div>
+            <div class="alert alert-danger" role="alert" *ngIf="this.error">
+              Course was not created please try again
+            </div>
           </form>
         </div>
         <div class="form-general col-md 8" *ngIf="selectedValue === 'content'">

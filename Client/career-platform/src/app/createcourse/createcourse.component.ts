@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { ICourses } from "../models/models";
+import { ICourses, ICreatedCourse } from "../models/models";
 import { RootState } from "../redux";
 import { Store } from "@ngrx/store";
 import { IState } from "../redux/types/authenticationTypes";
+import { CourseserviceService } from "../courses/courseservice.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-createcourse",
@@ -11,7 +13,11 @@ import { IState } from "../redux/types/authenticationTypes";
   styleUrls: ["./createcourse.component.css"],
 })
 export class CreatecourseComponent implements OnInit {
-  constructor(private store: Store<RootState>) {}
+  constructor(
+    private store: Store<RootState>,
+    private courseService: CourseserviceService,
+    private router: Router
+  ) {}
 
   @ViewChild("courseInfoData", { static: false }) courseInfoData: NgForm;
   @ViewChild("descriptionForm", { static: false }) descriptionForm: NgForm;
@@ -19,6 +25,7 @@ export class CreatecourseComponent implements OnInit {
   public selectedValue: string = "info";
   public imagePreview: string = null;
   public state: IState;
+  public error: boolean = false;
 
   ngOnInit() {
     this.store
@@ -34,15 +41,15 @@ export class CreatecourseComponent implements OnInit {
     this.imagePreview = event.srcElement.value;
   }
   onSubmitCourseInfo() {
-    let courseCreated = {
+    let courseCreated: ICreatedCourse = {
       name: this.courseInfoData.value.courseName,
       totalLectures: this.courseInfoData.value.totallectures,
       category: this.courseInfoData.value.category,
-      price: this.courseInfoData.value.price,
-      totalHours: this.courseInfoData.value.totalhours,
+      price: this.courseInfoData.value.price.toString(),
+      totalHours: this.courseInfoData.value.totalhours.toString(),
       level: this.courseInfoData.value.level,
       image: this.courseInfoData.value.imageurl,
-      shortDesc: this.courseInfoData.value.level,
+      shortDesc: this.courseInfoData.value.shortDescription,
       courseAuthor: this.state.user.firstName + this.state.user.lastName,
       email: this.state.user.email,
     };
@@ -50,10 +57,21 @@ export class CreatecourseComponent implements OnInit {
     this.selectedValue = "description";
   }
   onSubmitCourseFinalCourse() {
-    let courseCreate = JSON.parse(sessionStorage.getItem("tempCourse"));
-
+    let courseCreate: ICreatedCourse = JSON.parse(
+      sessionStorage.getItem("tempCourse")
+    );
     courseCreate.desc = this.descriptionForm.value.description;
-
-    console.log(courseCreate);
+    this.courseService.addCourse(courseCreate).subscribe(
+      (res: ICreatedCourse) => {
+        console.log(res);
+        sessionStorage.removeItem("tempCourse");
+        this.selectedValue = "content";
+        this.router.navigate(["course", res.name, res.id]);
+      },
+      (error) => {
+        console.log(error);
+        this.error = true;
+      }
+    );
   }
 }

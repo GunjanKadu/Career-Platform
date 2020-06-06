@@ -20,3 +20,6 @@ export const ADDUSERTOCOURSE = (userId: number, courseId: number) =>
 //Change user to Instructor
 export const CHANGETOINSTRUCTOR = (userId: number) =>
   `http://localhost:8080/api/users/${userId}/changeToInstructor/`;
+
+// Add Course
+export const ADDCOURSE = "http://localhost:8080/api/courses";
