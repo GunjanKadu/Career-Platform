@@ -55,4 +55,18 @@ export class CourseserviceService {
       headers,
     });
   }
+  updateCourse(course: ICreatedCourse, courseId: number) {
+    const token = sessionStorage.getItem("token");
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.put<ICreatedCourse>(
+      `${URL.ADDCOURSE}/${courseId}`,
+      course,
+      {
+        headers,
+      }
+    );
+  }
 }

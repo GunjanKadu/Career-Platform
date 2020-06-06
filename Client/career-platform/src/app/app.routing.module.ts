@@ -20,6 +20,11 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     component: CreatecourseComponent,
   },
+  {
+    path: "createcourse/:token/:courseId",
+    canActivate: [AuthGuard],
+    component: CreatecourseComponent,
+  },
 ];
 
 @NgModule({

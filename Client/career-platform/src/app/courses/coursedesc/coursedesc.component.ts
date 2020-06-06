@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-  DoCheck,
-  OnDestroy,
-} from "@angular/core";
+import { Component, OnInit, DoCheck, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CourseserviceService } from "../courseservice.service";
 import { ICourses } from "src/app/models/models";
@@ -115,5 +108,13 @@ export class CoursedescComponent implements OnInit, DoCheck, OnDestroy {
         this.router.navigate(["/course/", this.courseName, this.courseId]);
       });
     }
+  }
+
+  addlecturedToCourse() {
+    this.router.navigate([
+      "createcourse",
+      sessionStorage.getItem("token"),
+      this.course.id,
+    ]);
   }
 }

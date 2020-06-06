@@ -42,7 +42,7 @@
             [checked]="selectedValue === 'content'"
             (change)="whichFormToShow('content')"
           />
-          <label for="content">Content</label>
+          <label for="content">Course Lectures</label>
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
                   type="text"
                   class="form-control"
                   id="courseName"
-                  ngModel
+                  [ngModel]="existingCourse?.name"
                   name="courseName"
                   required
                 />
@@ -74,7 +74,7 @@
                 <select
                   class="form-control form-control"
                   id="Category"
-                  ngModel
+                  [ngModel]="existingCourse?.category"
                   name="category"
                   required
                 >
@@ -97,7 +97,7 @@
                   id="s_desc"
                   rows="3"
                   placeholder="Become an expert in ..."
-                  ngModel
+                  [ngModel]="existingCourse?.shortDesc"
                   name="shortDescription"
                   required
                 ></textarea>
@@ -112,7 +112,7 @@
                   type="number"
                   class="form-control"
                   id="lectures"
-                  ngModel
+                  [ngModel]="existingCourse?.totalLectures"
                   required
                   name="totallectures"
                 />
@@ -127,7 +127,7 @@
                   type="number"
                   class="form-control"
                   id="hours"
-                  ngModel
+                  [ngModel]="existingCourse?.totalHours"
                   name="totalhours"
                   required
                 />
@@ -141,7 +141,7 @@
                   class="form-control"
                   id="price"
                   placeholder="€"
-                  ngModel
+                  [ngModel]="existingCourse?.price"
                   name="price"
                   required
                 />
@@ -157,7 +157,7 @@
                   class="form-control"
                   id="image"
                   (change)="onImageSelect($event)"
-                  ngModel
+                  [ngModel]="existingCourse?.image"
                   name="imageurl"
                   required
                 />
@@ -181,7 +181,7 @@
                 <select
                   class="form-control form-control"
                   id="level"
-                  ngModel
+                  [ngModel]="existingCourse?.level"
                   name="level"
                   required
                 >
@@ -225,7 +225,7 @@
                   id="desc"
                   rows="15"
                   name="description"
-                  ngModel
+                  [ngModel]="existingCourse?.desc"
                   required
                 ></textarea>
               </div>
