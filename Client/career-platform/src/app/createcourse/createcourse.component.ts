@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { ICreatedCourse, ICourses } from "../models/models";
+import { ICreatedCourse, ICourses, ILecture } from "../models/models";
 import { RootState } from "../redux";
 import { Store } from "@ngrx/store";
 import { IState } from "../redux/types/authenticationTypes";
@@ -23,12 +23,14 @@ export class CreatecourseComponent implements OnInit {
 
   @ViewChild("courseInfoData", { static: false }) courseInfoData: NgForm;
   @ViewChild("descriptionForm", { static: false }) descriptionForm: NgForm;
+  @ViewChild("lectureInfo", { static: false }) lectureInfo: NgForm;
 
   public selectedValue: string;
   public imagePreview: string = null;
   public state: IState;
   public error: boolean = false;
   public existingCourse: ICourses;
+  public showCourseSuccess: boolean;
 
   ngOnInit() {
     this.selectedValue = "info";
@@ -38,6 +40,7 @@ export class CreatecourseComponent implements OnInit {
       this.courseService
         .fetchCourseById(courseId)
         .subscribe((course: ICourses) => {
+          console.log(course);
           if (course.email === token.sub) {
             this.existingCourse = course;
             this.imagePreview = course.image;
@@ -99,5 +102,25 @@ export class CreatecourseComponent implements OnInit {
         .updateCourse(courseCreate, this.existingCourse.id)
         .subscribe((res) => console.log(res));
     }
+  }
+  onSubmitLecture() {
+    const lecture: ILecture = {
+      title: this.lectureInfo.value.lectureTitle,
+      desc: this.lectureInfo.value.lectureDescription,
+    };
+    this.courseService
+      .addLectureToCourse(lecture, this.existingCourse.id)
+      .subscribe((res) => {
+        this.showCourseSuccess = true;
+        setTimeout(() => {
+          this.courseService
+            .fetchCourseById(this.existingCourse.id)
+            .subscribe((course: ICourses) => (this.existingCourse = course));
+          this.showCourseSuccess = false;
+        }, 1000);
+
+        console.log(res);
+        this.lectureInfo.resetForm();
+      });
   }
 }

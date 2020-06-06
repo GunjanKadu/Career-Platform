@@ -28,7 +28,7 @@ export interface ICourses {
 
 export interface ILecture {
   desc: String;
-  id: number;
+  id?: number;
   title: String;
 }
 

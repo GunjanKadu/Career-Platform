@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import * as URL from "../url";
-import { ICourses, ICreatedCourse } from "../models/models";
+import { ICourses, ICreatedCourse, ILecture } from "../models/models";
 
 @Injectable({
   providedIn: "root",
@@ -64,6 +64,20 @@ export class CourseserviceService {
     return this.http.put<ICreatedCourse>(
       `${URL.ADDCOURSE}/${courseId}`,
       course,
+      {
+        headers,
+      }
+    );
+  }
+  addLectureToCourse(lecture: ILecture, courseId: number) {
+    const token = sessionStorage.getItem("token");
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<ICreatedCourse>(
+      `${URL.ADDLECTURETOCOURSE}/${courseId}`,
+      lecture,
       {
         headers,
       }

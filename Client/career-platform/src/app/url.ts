@@ -23,3 +23,6 @@ export const CHANGETOINSTRUCTOR = (userId: number) =>
 
 // Add Course
 export const ADDCOURSE = "http://localhost:8080/api/courses";
+
+// Add Lecture to Course
+export const ADDLECTURETOCOURSE = "http://localhost:8080/api/courses/lectures";

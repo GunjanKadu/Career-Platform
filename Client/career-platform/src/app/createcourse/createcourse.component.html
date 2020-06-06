@@ -248,7 +248,97 @@
           <h3 style="text-align: center; margin-bottom: 2rem;">
             Course Lectures
           </h3>
-          <form></form>
+          <div
+            class="lecture_container"
+            style="max-height: 29vh; overflow: hidden; overflow-y: auto;"
+            *ngIf="
+              existingCourse &&
+                existingCourse.courseLecture &&
+                !showCourseSuccess;
+              else spinner
+            "
+          >
+            <div
+              class="alert alert-secondary"
+              role="alert"
+              *ngFor="let lecture of existingCourse.courseLecture"
+              style="
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: 93%;
+                margin: 1rem auto;
+              "
+            >
+              <div>
+                <h1 style="font-size: 15px; font-weight: bold;">
+                  {{ lecture.title }}
+                </h1>
+                <h3 style="font-size: 12px;">{{ lecture.desc }}</h3>
+              </div>
+              <div class="buttons">
+                <button style="margin-right: 10px;" class="btn btn-success">
+                  Edit
+                </button>
+                <button class="btn btn-danger">Delete</button>
+              </div>
+            </div>
+          </div>
+          <ng-template #spinner>
+            <div class="loader" style="height: 20px; width: 20px;">
+              Loading...
+            </div>
+          </ng-template>
+          <hr />
+          <h3 style="text-align: center;">Add A New Lecture</h3>
+          <form
+            style="width: 93%; margin: 2rem auto;"
+            (ngSubmit)="onSubmitLecture()"
+            #lectureInfo="ngForm"
+          >
+            <div class="form-group row">
+              <label for="lectureTitle" class="col-sm-3 col-form-label"
+                >Title
+              </label>
+              <div class="col-sm-7">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lectureTitle"
+                  ngModel
+                  name="lectureTitle"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="lectureDescription" class="col-sm-3 col-form-label"
+                >Description
+              </label>
+              <div class="col-sm-7">
+                <textarea
+                  class="form-control"
+                  id="lectureDescription"
+                  rows="5"
+                  name="lectureDescription"
+                  ngModel
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="add_lecture" style="text-align: center;">
+              <button class="btn btn-danger" type="submit">
+                Add Lecture
+              </button>
+            </div>
+          </form>
+          <div
+            class="alert alert-success"
+            role="alert"
+            *ngIf="showCourseSuccess"
+          >
+            Course Added Successfully
+          </div>
         </div>
       </div>
     </div>
