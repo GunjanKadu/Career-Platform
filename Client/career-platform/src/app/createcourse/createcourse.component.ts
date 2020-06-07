@@ -49,10 +49,10 @@ export class CreatecourseComponent implements OnInit {
             this.existingCourse = null;
           }
         });
-      this.store
-        .select("authentication")
-        .subscribe((state: IState) => (this.state = state));
     }
+    this.store
+      .select("authentication")
+      .subscribe((state: IState) => (this.state = state));
   }
 
   whichFormToShow(value: string) {
