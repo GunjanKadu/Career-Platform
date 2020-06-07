@@ -1,9 +1,10 @@
 import { Component, OnInit, DoCheck, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { CourseserviceService } from "../courseservice.service";
-import { ICourses } from "src/app/models/models";
 import { Store } from "@ngrx/store";
 import { RootState } from "src/app/redux";
+
+import { CourseserviceService } from "../courseservice.service";
+import { ICourses } from "src/app/models/models";
 import { IState } from "src/app/redux/types/authenticationTypes";
 import * as Action from "../../redux/actions/action";
 @Component({

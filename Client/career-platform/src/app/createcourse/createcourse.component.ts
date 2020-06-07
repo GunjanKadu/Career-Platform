@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { ICreatedCourse, ICourses, ILecture } from "../models/models";
-import { RootState } from "../redux";
 import { Store } from "@ngrx/store";
-import { IState } from "../redux/types/authenticationTypes";
-import { CourseserviceService } from "../courses/courseservice.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import * as jwt_decode from "jwt-decode";
 
+import { RootState } from "../redux";
+import { CourseserviceService } from "../courses/courseservice.service";
+import { ICreatedCourse, ICourses, ILecture } from "../models/models";
+import { IState } from "../redux/types/authenticationTypes";
 @Component({
   selector: "app-createcourse",
   templateUrl: "./createcourse.component.html",
