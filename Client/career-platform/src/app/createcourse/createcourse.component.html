@@ -237,11 +237,25 @@
                 type="submit"
                 [disabled]="!descriptionForm.valid"
               >
-                Create Course
+                {{ existingCourse ? "Update Course" : "Create Course" }}
               </button>
             </div>
             <div class="alert alert-danger" role="alert" *ngIf="this.error">
-              Course was not created please try again
+              Course was not
+              {{
+                this.existingCourse && !this.courseUpdated
+                  ? "Updated"
+                  : "Created"
+              }}
+              please try again
+            </div>
+            <div
+              class="alert alert-success"
+              role="alert"
+              *ngIf="this.courseUpdated"
+              style="margin: 2rem auto; width: fit-content;"
+            >
+              Course Updated Successfully
             </div>
           </form>
         </div>
@@ -281,7 +295,7 @@
                   {{ lecture.title }}
                 </h1>
                 <h3 style="font-size: 12px;">
-                  {{ lecture.desc | slice: 1:70 }}...
+                  {{ lecture.desc | slice: 0:70 }}...
                 </h3>
               </div>
               <div class="buttons">

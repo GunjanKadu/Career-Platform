@@ -31,6 +31,7 @@ export class CreatecourseComponent implements OnInit {
   public error: boolean = false;
   public existingCourse: ICourses;
   public showCourseSuccess: boolean;
+  public courseUpdated: boolean;
 
   ngOnInit() {
     this.selectedValue = "info";
@@ -100,7 +101,14 @@ export class CreatecourseComponent implements OnInit {
     } else {
       this.courseService
         .updateCourse(courseCreate, this.existingCourse.id)
-        .subscribe((res) => console.log(res));
+        .subscribe((res) => {
+          this.courseUpdated = true;
+          setTimeout(() => (this.courseUpdated = false), 2500);
+        }),
+        (error) => {
+          console.log(error);
+          this.error = true;
+        };
     }
   }
   onSubmitLecture() {
@@ -116,7 +124,13 @@ export class CreatecourseComponent implements OnInit {
           setTimeout(() => {
             this.courseService
               .fetchCourseById(this.existingCourse.id)
-              .subscribe((course: ICourses) => (this.existingCourse = course));
+              .subscribe((course: ICourses) => {
+                this.existingCourse = course;
+              }),
+              (error) => {
+                console.log(error);
+                this.error = true;
+              };
           }, 1000);
           console.log(res);
           this.lectureInfo.resetForm();
