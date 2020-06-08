@@ -57,6 +57,7 @@ export class CoursesComponent implements OnInit {
                 this.courses = coursesCreatedByUser;
                 this.lengthOfResults = coursesCreatedByUser.length;
                 this.loading = false;
+                this.courseCopy = courses;
               });
           } else if (!this.user.authenticated) {
             this.router.navigate(["/"]);
