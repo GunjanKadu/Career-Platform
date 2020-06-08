@@ -26,4 +26,10 @@ public class TopCourses {
         return featuredCourses;
     }
 
+    @DeleteMapping("/featuredCourses/{courseId}")
+    public String deleteTopCourse(@PathVariable int courseId) {
+        featuredCourseService.delete(courseId);
+        return "Deleted Course";
+    }
+
 }

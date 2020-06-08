@@ -32,7 +32,7 @@ export class CoursesComponent implements OnInit {
   public loading: boolean = true;
   public lectureCheckBox: boolean = false;
   public durationCheckBox: boolean = false;
-
+  public checked;
   ngOnInit() {
     setTimeout(() => {
       this.route.params.subscribe((params: Params) => {
@@ -104,6 +104,7 @@ export class CoursesComponent implements OnInit {
     }
   }
   durationFilter(value: number) {
+    console.log(this.checked);
     if (!this.durationCheckBox && !this.lectureCheckBox) {
       this.courses = this.courseCopy;
     }

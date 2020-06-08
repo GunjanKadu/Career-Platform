@@ -10,4 +10,5 @@ public interface FeaturedCourseService {
 
     void save(FeaturedCourses featuredCourses);
 
+    void delete(int id);
 }

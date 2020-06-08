@@ -46,7 +46,12 @@
       <div class="duration">
         <h2>Duration</h2>
         <div class="group">
-          <input type="checkbox" id="10-20" (change)="durationFilter(10)" />
+          <input
+            type="checkbox"
+            id="10-20"
+            (change)="durationFilter(10)"
+            [(ngModel)]="checked"
+          />
           <label for="10-20">10+ Hours</label>
         </div>
         <div class="group">
@@ -117,6 +122,19 @@
     </div>
 
     <div class="courses_list col-md-6">
+      <div
+        class="viewall"
+        style="
+          display: flex;
+          justify-content: flex-end;
+          cursor: pointer;
+          font-weight: bold;
+          color: darkblue;
+        "
+        (click)="this.courses = courseCopy"
+      >
+        View All
+      </div>
       <a
         *ngFor="let course of courses; trackBy: identity; let i = index"
         [routerLink]="['/', 'course', course.name, course.id]"

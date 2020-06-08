@@ -30,6 +30,8 @@ export class NavbarComponent implements OnInit {
   @ViewChild("closeUserDetailsModal", { static: false }) closeUserDetailsModal: ElementRef;
   // prettier-ignore
   @ViewChild("closeCreateCourseModal", { static: false }) closeCreateCourseModal: ElementRef;
+  // prettier-ignore
+  @ViewChild("closeBecomeInstructorModal", { static: false }) closeBecomeInstructorModal: ElementRef;
 
   public firstName: string;
   public lastName: string;
@@ -193,7 +195,15 @@ export class NavbarComponent implements OnInit {
   becomeInstructor() {
     this.authenticationService
       .changeUserToInstructor(this.user.user.id)
-      .subscribe((res) => console.log(res));
+      .subscribe((res) => {
+        this.authenticationService
+          .fetchSingleUser(this.userName)
+          .pipe(
+            tap((user: IUser) => this.store.dispatch(new Action.AddUser(user)))
+          )
+          .subscribe((res) => this.router.navigate(["/createcourse"]));
+        this.closeBecomeInstructorModal.nativeElement.click();
+      });
   }
   disableError() {
     this.error = null;

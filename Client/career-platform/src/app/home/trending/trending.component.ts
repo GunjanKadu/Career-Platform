@@ -18,7 +18,7 @@ export class TrendingComponent implements OnInit {
       this.trendingCourseService
         .fetchTrendingCourses()
         .subscribe((courses: any) => (this.trendingCourses = courses));
-    }, 2000);
+    }, 500);
   }
   scrollTo(el: HTMLElement) {
     el.scrollIntoView({ behavior: "smooth" });

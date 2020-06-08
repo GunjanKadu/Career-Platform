@@ -24,4 +24,8 @@ public class FeaturedCoursesImpl implements FeaturedCourseService {
     public void save(FeaturedCourses featuredCourses) {
         featuredCourseDao.save(featuredCourses);
     }
+    @Override
+    public void delete(int id) {
+        featuredCourseDao.deleteById(id);
+    }
 }
