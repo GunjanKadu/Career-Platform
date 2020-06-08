@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import * as jwt_decode from "jwt-decode";
+import * as cloneDeep from "lodash/cloneDeep";
 
 import { CourseserviceService } from "./courseservice.service";
 import { ICourses } from "../models/models";
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import * as jwt_decode from "jwt-decode";
 import { Store } from "@ngrx/store";
 import { RootState } from "../redux";
 import { IState } from "../redux/types/authenticationTypes";
@@ -24,10 +25,13 @@ export class CoursesComponent implements OnInit {
   public courses: Array<ICourses>;
   public lecture: any;
   public user: IState;
+  public courseCopy: ICourses[];
   public searchTerm: string = null;
   public token: string = null;
   public lengthOfResults: number;
   public loading: boolean = true;
+  public lectureCheckBox: boolean = false;
+  public durationCheckBox: boolean = false;
 
   ngOnInit() {
     setTimeout(() => {
@@ -37,9 +41,9 @@ export class CoursesComponent implements OnInit {
         this.token = params["token"];
         if (this.token) {
           const decodedToken = jwt_decode(this.token);
-          this.store
-            .select("authentication")
-            .subscribe((state: IState) => (this.user = state));
+          this.store.select("authentication").subscribe((state: IState) => {
+            this.user = state;
+          });
           if (
             this.user.authenticated &&
             this.user.user.email == decodedToken.sub
@@ -73,6 +77,7 @@ export class CoursesComponent implements OnInit {
               } else {
                 this.courses = courses;
                 this.loading = false;
+                this.courseCopy = courses;
               }
             });
         }
@@ -81,5 +86,38 @@ export class CoursesComponent implements OnInit {
   }
   identity(index: number, course: ICourses) {
     return course.id;
+  }
+  lectureFilter(value: number) {
+    if (!this.durationCheckBox && !this.lectureCheckBox) {
+      this.courses = this.courseCopy;
+    }
+    console.log(this.courseCopy);
+    this.lectureCheckBox = !this.lectureCheckBox;
+    if (this.lectureCheckBox) {
+      console.log("lecturefilter");
+      let filteredCourse = this.courses.filter(
+        (course: ICourses) => course.totalLectures > value
+      );
+      this.courses = filteredCourse;
+    } else if (!this.durationCheckBox) {
+      this.courses = this.courseCopy;
+    }
+  }
+  durationFilter(value: number) {
+    if (!this.durationCheckBox && !this.lectureCheckBox) {
+      this.courses = this.courseCopy;
+    }
+    console.log(this.courseCopy);
+    this.durationCheckBox = !this.durationCheckBox;
+    if (this.durationCheckBox) {
+      console.log("durationFiler");
+      let filteredCourse = this.courses.filter(
+        (course: ICourses) => +course.totalHours > value
+      );
+      console.log(filteredCourse);
+      this.courses = filteredCourse;
+    } else if (!this.lectureCheckBox) {
+      this.courses = this.courseCopy;
+    }
   }
 }

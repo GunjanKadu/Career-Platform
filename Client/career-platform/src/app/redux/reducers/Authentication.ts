@@ -1,6 +1,5 @@
 import * as I from "../types/authenticationTypes";
 import * as ActionTypes from "../actions/action";
-import * as cloneDeep from "lodash/cloneDeep";
 
 const initialState: I.IState = {
   token: null,

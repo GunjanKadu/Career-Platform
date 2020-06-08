@@ -46,31 +46,31 @@
       <div class="duration">
         <h2>Duration</h2>
         <div class="group">
-          <input type="checkbox" id="10-20" />
-          <label for="10-20">10-20 Hours</label>
+          <input type="checkbox" id="10-20" (change)="durationFilter(10)" />
+          <label for="10-20">10+ Hours</label>
         </div>
         <div class="group">
-          <input type="checkbox" id="20-30" />
-          <label for="20-30">20-30 Hours</label>
+          <input type="checkbox" id="20-30" (change)="durationFilter(20)" />
+          <label for="20-30">20+ Hours</label>
         </div>
         <div class="group">
-          <input type="checkbox" id="30-40" />
-          <label for="30-40">30-40 Hours</label>
+          <input type="checkbox" id="30+" (change)="durationFilter(30)" />
+          <label for="30+">30+ Hours</label>
         </div>
       </div>
       <hr />
       <div class="lectures">
         <h2>Lectures</h2>
         <div class="group">
-          <input type="checkbox" id="10+" />
+          <input type="checkbox" id="10+" (change)="lectureFilter(10)" />
           <label for="10+">10 +</label>
         </div>
         <div class="group">
-          <input type="checkbox" id="20+" />
+          <input type="checkbox" id="20+" (change)="lectureFilter(20)" />
           <label for="20+">20 + </label>
         </div>
         <div class="group">
-          <input type="checkbox" id="30+" />
+          <input type="checkbox" id="30+" (change)="lectureFilter(30)" />
           <label for="30+">30 + </label>
         </div>
       </div>
