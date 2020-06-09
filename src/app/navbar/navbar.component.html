@@ -12,7 +12,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand" [routerLink]="['/']">
-    <img class="logo" src="../../assets/img/navLogo.jpg" alt="Brand" />
+    <img class="logo" src="../../assets/img/navLogo.png" alt="Brand" />
   </a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -577,7 +577,7 @@
   style="background: rgba(0, 0, 0, 0.5);"
 >
   <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-    <div class="modal-content" style="height: 50vh; margin-left: 11vw;">
+    <div class="modal-content">
       <div class="modal-header">
         <h5
           class="modal-title text-center"
@@ -602,16 +602,11 @@
             Start Teaching
           </h1>
           <div class="container">
-            <button
-              class="btn btn-danger"
-              style="margin-top: 10%; width: 13vw;"
-              (click)="createNewCourse()"
-            >
+            <button class="btn btn-danger" (click)="createNewCourse()">
               Create a new course
             </button>
             <button
               class="btn btn-danger"
-              style="margin-top: 10%; width: 13vw;"
               (click)="viewExistingCreatedCourse()"
             >
               View Existing Created Course

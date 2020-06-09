@@ -48,3 +48,9 @@
   font-size: 31px;
   color: #267892;
 }
+
+@media (max-width: 1500px) {
+  #currentlycreatedCourse .card {
+    margin-left: 0rem;
+  }
+}

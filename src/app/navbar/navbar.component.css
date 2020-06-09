@@ -50,6 +50,8 @@
 .modal-content {
   width: 70%;
   overflow: hidden;
+  position: relative;
+  left: 3vw;
 }
 .card {
   transition: all 2s ease-in;
@@ -137,10 +139,37 @@
   padding: 20px;
   color: white;
 }
-
+#viewOrCreate .modal-content {
+  height: 50vh;
+  margin-left: 11vw;
+}
+#viewOrCreate .btn {
+  width: 15vw;
+  margin-top: 10%;
+}
 #viewOrCreate .container,
 #viewOrCreate .modal-body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Media queries */
+@media (max-width: 1500px) {
+  .modal-dialog {
+    position: relative;
+    left: 4vw;
+  }
+  .mycourses {
+    margin-left: 16vw;
+  }
+
+  #viewOrCreate .modal-content {
+    height: 58vh;
+    position: relative;
+    left: -2vw;
+  }
+  #viewOrCreate .btn {
+    width: 15vw;
+  }
 }

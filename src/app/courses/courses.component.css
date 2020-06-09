@@ -137,3 +137,18 @@ star-rating {
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 1500px) {
+  .courses {
+    height: 17rem;
+  }
+  .highlight h2 {
+    width: 35rem;
+  }
+  .highlight p {
+    width: 40rem;
+  }
+  .highlight .btn {
+    margin-left: 28%;
+  }
+}
