@@ -31,5 +31,4 @@ public class TopCourses {
         featuredCourseService.delete(courseId);
         return "Deleted Course";
     }
-
 }
