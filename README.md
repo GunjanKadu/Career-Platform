@@ -95,6 +95,18 @@ Server Build Tools| Maven(Java) or Gradle
 
 </span>
 
+<br/>
+<h3 align="center">STEPS TO RUN FRONTEND</h3>
+<li>Clone the repo and navigate into the repo</li>
+
+    npm i && ng serve
+    
+    
+<li>Navigate To </li>
+    
+    http://localhost:4200
+
+
 <h3 align="center">STEPS TO RUN BACKEND DOCKER IMAGE</h3>
 <li>Pull The Image From the Docker Hub</li>
 
