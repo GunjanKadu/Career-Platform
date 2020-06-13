@@ -33,7 +33,6 @@ import { AuthGuard } from "./auth.guard.service";
     CreatecourseComponent,
   ],
   imports: [
-    HomeComponent,
     FormsModule,
     BrowserModule,
     HttpClientModule,

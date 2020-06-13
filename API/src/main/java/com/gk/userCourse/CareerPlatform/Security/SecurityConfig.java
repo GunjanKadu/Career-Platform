@@ -26,7 +26,7 @@ import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity( jsr250Enabled = true)
+@EnableGlobalMethodSecurity(jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -77,8 +77,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/login", "/api/signin","/").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/featuredCourses","/api/courses/**").permitAll()
+                .antMatchers("/api/login", "/api/signin", "/").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/featuredCourses", "/api/courses/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
